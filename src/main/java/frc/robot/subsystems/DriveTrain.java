@@ -10,11 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Encoder;
-//import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-//import frc.robot.commands.robotMovement;
 
 //use this for anything on th drivetrain like guiding electricty or something (likely redundent so delete if un needed)
 public class DriveTrain extends SubsystemBase {
@@ -30,15 +27,15 @@ public class DriveTrain extends SubsystemBase {
   // Metal Robot Code
   //Talon leftMotor = new Talon(RobotMap.LEFT_MOTOR_CHANNEL);
   //Talon rightMotor = new Talon(RobotMap.RIGHT_MOTOR_CHANNEL);
-  DifferentialDrive robotDrive;
-  static final double r2o2 = Math.sqrt(2)/2;
-  double thrust = 0.75;
-  public static final int ARCADE=-1,WILLIAM=0,BBALL=1,BURGERKING=2,JAEGER=3;
+  private DifferentialDrive robotDrive;
+  private static final double r2o2 = Math.sqrt(2)/2;
+  private double thrust = 0.75;
+  private static final int ARCADE=-1,WILLIAM=0,BBALL=1,BURGERKING=2,JAEGER=3;
   private double stationaryTolerance = 0.05;
-  Victor lMotor, rMotor;
-  public Encoder encoderL, encoderR;
-  double yk,xk; // movement decay
-  double k = 0.05;
+  private Victor lMotor, rMotor;
+  // private Encoder encoderL, encoderR;
+  private double yk,xk; // movement decay
+  private double k = 0.05;
 
   public DriveTrain() {
     // calls the subsystem to let it know that it needs to be called as a subsystem

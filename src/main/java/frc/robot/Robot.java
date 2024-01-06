@@ -24,12 +24,15 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
 
   //Declare Subsystems as Instance Variables
-  public static DriveTrain Drive;
+  private static DriveTrain Drive;
   
-  public static OI m_oi;
+  private static OI m_oi;
 
-  public Command m_autonomousCommand;
-  public SendableChooser<Command> m_chooser;
+  private Command m_autonomousCommand;
+  private SendableChooser<Command> m_chooser;
+
+  private int m_driveMode;
+  private SendableChooser<Integer> m_driveChooser;
   
 
   /**
@@ -44,11 +47,21 @@ public class Robot extends TimedRobot {
     Drive = new DriveTrain();
 
     m_oi = new OI();
+
+    //Example on how we would do this
     m_chooser = new SendableChooser<Command>();
     m_chooser.setDefaultOption("auto1", new ParallelCommandGroup());
     // m_chooser.addOption("auto2", new auto2());
     // m_chooser.addOption("auto3", new auto3());
     SmartDashboard.putData("Auto mode", m_chooser);
+
+    m_driveChooser = new SendableChooser<Integer>();
+    m_driveChooser.setDefaultOption("Arcade", -1);
+    m_driveChooser.addOption("William", 0);
+    m_driveChooser.addOption("BBall", 1);
+    m_driveChooser.addOption("Burger King", 2);
+    m_driveChooser.addOption("Jaeger", 3);
+
   }
 
   /**
@@ -121,6 +134,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+  
   }
 
   /**
