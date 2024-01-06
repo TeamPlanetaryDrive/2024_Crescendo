@@ -28,62 +28,25 @@ public class RobotMap {
         // Camera Resolution Dimensions
         public static final int CAM_WID = 640, CAM_HEI = 480;
 
-        // piston based
-        public static int GRIPPER_CHANNEL_A = 0, GRIPPER_CHANNEL_B = 2;
-
         // Drive system PID Parameters
         public static final double DRIVE_PID_POSITION_KP = 2.00, // 2.00
                         DRIVE_PID_POSITION_KI = 0.01, // 0.01
                         DRIVE_PID_POSITION_KD = 1.00, // 1.00
                         DRIVE_PID_ANGLE_KP = 0.02, DRIVE_PID_ANGLE_KI = 0.001, DRIVE_PID_ANGLE_KD = 0.0;
 
+        //CHANNELS!!!
+        
         // Digital (0-9, 10-25)
         // 2019 bot
         //public static int LEFT_MOTOR_CHANNEL = 0, RIGHT_MOTOR_CHANNEL = 1;
         // 2022 bot
         public static int LEFT_MOTOR_CHANNEL = 9, RIGHT_MOTOR_CHANNEL = 8;
-
-        // motor based
-        //outlining spintake motors, placeholder channels
-        public static int SPINTAKE_CHANNEL_L = 0;
-        public static int SPINTAKE_CHANNEL_R = 6;
-
-        //public static int LEFT_SHOOTER_CHANNEL = 4;
-
-        //public static int RIGHT_SHOOTER_CHANNEL = 5;
-
-        public static int SHOOTER_AIM_CHANNEL = 1;
         
-                        // enconder channels
-        // not final yet
-        // public static int DRIVETRAIN_ENCODER_CHANNEL_L_A = 0, DRIVETRAIN_ENCODER_CHANNEL_L_B = 1, DRIVETRAIN_ENCODER_CHANNEL_R_A = 2, DRIVETRAIN_ENCODER_CHANNEL_R_B = 3;
-        public static int SHOOTER_ENCODER_CHANNEL_A = 0, SHOOTER_ENCODER_CHANNEL_B = 1;
-
-        // HARDWARE
-        
-        public static MotorController lift;
-
-        // state for lift motor
-        public static boolean liftStart = false;
-
-        
+        //Controller
         public static JoystickButton aButton, bButton, xButton, yButton, backButton, startButton, leftBumper, rightBumper, leftStickButton, rightStickButton;
         public static final int XBOX_PORT = 1;
         public static final XboxController XController = new XboxController(XBOX_PORT);
 
-
-        
-        public static final int PISTON_CHANNEL_FORWARD = 0, PISTON_CHANNEL_REVERSE = 1;
-
-        // For example to map the left and right motors, you could define the
-        // following variables to use with your drivetrain subsystem.
-        // public static int leftMotor = 1;
-        // public static int rightMotor = 2;
-
-        // If you are using multiple modules, make sure to define both the port
-        // number and the module. For example you with a rangefinder:
-        // public static int rangefinderPort = 1;
-        // public static int rangefinderModule = 1;
         public static void init() {
                 //map each button to a JoystickButton
                 aButton = new JoystickButton(XController, 1);

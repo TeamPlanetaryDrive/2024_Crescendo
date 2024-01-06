@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
@@ -25,7 +24,7 @@ import frc.robot.commands.autonomous.*;
  */
 public class Robot extends TimedRobot {
 
-  public static DriveTrain Drive;// could be redundent , if we delete drivetrain get rid of this
+  public static DriveTrain Drive;
   public static OI m_oi;
 
   public Command m_autonomousCommand;
@@ -117,7 +116,6 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    SmartDashboard.putData("Encoder", m_chooser);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
