@@ -7,16 +7,9 @@
 
 package frc.robot;
 
-/* logitech attack 3 garbage xbox superiority gang :muscle: :triumph:
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
-*/
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.PneumaticsModuleType;
-// import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
