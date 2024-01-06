@@ -3,7 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SubsystemExample;
 
-public class CommandExample extends CommandBase{
+public class CommandExample extends CommandBase {
     private SubsystemExample subsystem;
 
     public CommandExample(SubsystemExample subsystem) {
@@ -30,4 +30,5 @@ public class CommandExample extends CommandBase{
     @Override
     public void end(boolean interrupted) {
         subsystem.stop();
+    }
 }
