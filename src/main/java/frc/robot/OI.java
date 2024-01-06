@@ -6,14 +6,7 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
-import frc.robot.commands.Intake.dropShooter;
-import frc.robot.commands.Intake.intakeCBT;
-import frc.robot.commands.Intake.intakeDTF;
-import frc.robot.commands.Intake.intakeDTFSlow;
-import frc.robot.commands.vision.*;
-
 
 /**
  * This class is what binds the controls on the physical operator
@@ -21,35 +14,33 @@ import frc.robot.commands.vision.*;
  */
 public class OI {
 
-    private static final int LEFT_STICK_PRESS = 0, RIGHT_STICK_PRESS = 1;    
-
   public OI() {
-    RobotMap.aButton.whenPressed(new turnToGoal());    
-    // RobotMap.bButton.whenPressed(new testCommand());
-    RobotMap.xButton.whenPressed(new dropShooter());
-    //RobotMap.yButton.whenPressed(new climb()); 
-    // RobotMap.startButton.whenPressed(new setLift(true));
-    // RobotMap.backButton.whenPressed(new setLift(false));
-    RobotMap.leftBumper.whenPressed(new SequentialCommandGroup(new intakeCBT(2), new intakeDTF(30)));
-    RobotMap.rightBumper.whenPressed(new intakeDTFSlow(25));
+    // RobotMap.aButton.onTrue();    
+    // RobotMap.bButton.onTrue();
+    // RobotMap.xButton.onTrue();
+    // RobotMap.yButton.onTrue(); 
+    // RobotMap.startButton.onTrue();
+    // RobotMap.backButton.onTrue();
+    // RobotMap.leftBumper.onTrue();
+    // RobotMap.rightBumper.onTrue();
     
-    RobotMap.leftStickButton.whenHeld(new movement(LEFT_STICK_PRESS));
-    RobotMap.rightStickButton.whenHeld(new movement(RIGHT_STICK_PRESS));
+    // RobotMap.leftStickButton.whileTrue();
+    // RobotMap.rightStickButton.whileTrue();
     
     /*
     Goals for Xbox Controller Button Pressing Mapping
     -------------------------------------------------
-    D-Pad: Fine Movement Control (X)
-    Left Stick: Movement (X)
-    Right Stick: Manual Shooter Control (X)
-    Left Trigger: Spintake Wheels (H)
-    Right Trigger: Spin Shooter Wheels (H)
-    Left Bumper: Group Command Intake (P)
-    Right Bumper: Group Command Shoot (P)
-    X: Turn to Ball (P)
-    Y: Climb (P)
-    A: Turn to Goal (P)
-    B: ? [Reset?, Debug?] (P)
+    D-Pad: 
+    Left Stick: 
+    Right Stick: 
+    Left Trigger: 
+    Right Trigger: 
+    Left Bumper: 
+    Right Bumper: 
+    X: 
+    Y: 
+    A: 
+    B: 
     */
     
     
