@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
-import frc.robot.commands.autonomous.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,7 +23,9 @@ import frc.robot.commands.autonomous.*;
  */
 public class Robot extends TimedRobot {
 
+  //Declare Subsystems as Instance Variables
   public static DriveTrain Drive;
+  
   public static OI m_oi;
 
   public Command m_autonomousCommand;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     RobotMap.init();
     
+    //Initialize Subsystems
     Drive = new DriveTrain();
 
     m_oi = new OI();
