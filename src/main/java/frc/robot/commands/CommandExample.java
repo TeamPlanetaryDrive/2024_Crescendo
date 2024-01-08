@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SubsystemExample;
 
 public class CommandExample extends CommandBase {
+    // Make sure to AddRequirements() all Subsystems a Command uses
     private SubsystemExample subsystem;
 
     public CommandExample(SubsystemExample subsystem) {

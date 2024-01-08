@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SubsystemExample extends SubsystemBase{
+
+    // Keep the "Physical" Components of the Subsystems inside of the Subsystem as a Private Instance Variable
     private Victor motor;
     private DoubleSolenoid sole;
     
