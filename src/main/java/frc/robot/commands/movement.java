@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 
-public class movement extends CommandBase {
+public class movement extends Command {
     
     private static final int LEFT_STICK_PRESS = 0, RIGHT_STICK_PRESS = 1;
     private double thrust = 0.75, leftMotorSpeed = 0, rightMotorSpeed = 0;

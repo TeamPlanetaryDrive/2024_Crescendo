@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.SubsystemExample;
 
-public class CommandExample extends CommandBase {
+public class CommandExample extends Command {
     // Make sure to AddRequirements() all Subsystems a Command uses
     private SubsystemExample subsystem;
 
