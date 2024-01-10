@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
     m_driveChooser.addOption("BBall", 1);
     m_driveChooser.addOption("Burger King", 2);
     m_driveChooser.addOption("Jaeger", 3);
-
+    SmartDashboard.putData("Drive Mode", m_driveChooser);
   }
 
   /**
