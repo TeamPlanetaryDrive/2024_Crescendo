@@ -37,6 +37,8 @@ public class DriveTrain extends SubsystemBase {
   private double yk,xk; // movement decay
   private double k = 0.05;
 
+  private int mode = -1;
+
   public DriveTrain() {
     // calls the subsystem to let it know that it needs to be called as a subsystem
     super();
@@ -125,8 +127,11 @@ public class DriveTrain extends SubsystemBase {
     return lMotor;
   }
 
+  public void setMode(int mode) {
+    this.mode = mode;
+  }
+
   public void periodic(){
-    int mode = ARCADE;
     if(mode == ARCADE){
       //double yax = -Math.copySign(Math.pow(RobotMap.XController.getLeftY(), 2), RobotMap.XController.getLeftY());
       //double xax = Math.copySign(Math.pow(RobotMap.XController.getLeftX(), 2), RobotMap.XController.getLeftX());

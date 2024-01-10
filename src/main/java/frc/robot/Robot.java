@@ -24,9 +24,9 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
 
   //Declare Subsystems as Instance Variables
-  private static DriveTrain Drive;
+  public static DriveTrain Drive;
   
-  private static OI m_oi;
+  public static OI m_oi;
 
   private Command m_autonomousCommand;
   private SendableChooser<Command> m_chooser;
@@ -134,7 +134,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
+    m_driveMode = m_driveChooser.getSelected();
+    Drive.setMode(m_driveMode);
   
   }
 
