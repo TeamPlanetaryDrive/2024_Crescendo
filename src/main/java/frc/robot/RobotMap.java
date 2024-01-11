@@ -40,11 +40,11 @@ public class RobotMap {
         // 2019 bot
         //public static int LEFT_MOTOR_CHANNEL = 0, RIGHT_MOTOR_CHANNEL = 1;
         // 2022 bot
-        public static int LEFT_MOTOR_CHANNEL = 9, RIGHT_MOTOR_CHANNEL = 8;
+        public static int LEFT_MOTOR_CHANNEL = 1, RIGHT_MOTOR_CHANNEL = 0;
         
         //Controller
         public static JoystickButton aButton, bButton, xButton, yButton, backButton, startButton, leftBumper, rightBumper, leftStickButton, rightStickButton;
-        public static final int XBOX_PORT = 1;
+        public static final int XBOX_PORT = 0;
         public static final XboxController XController = new XboxController(XBOX_PORT);
 
         public static void init() {

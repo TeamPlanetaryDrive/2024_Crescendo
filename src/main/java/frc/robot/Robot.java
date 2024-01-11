@@ -31,9 +31,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private SendableChooser<Command> m_chooser;
 
-  private int m_driveMode;
   private SendableChooser<Integer> m_driveChooser;
-  
+  private int m_driveMode; //0: arcade, 1: tank 
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -44,7 +43,7 @@ public class Robot extends TimedRobot {
     RobotMap.init();
     
     //Initialize Subsystems
-    Drive = new DriveTrain();
+    Drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL);
 
     m_oi = new OI();
 
@@ -56,11 +55,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
 
     m_driveChooser = new SendableChooser<Integer>();
-    m_driveChooser.setDefaultOption("Arcade", -1);
-    m_driveChooser.addOption("William", 0);
-    m_driveChooser.addOption("BBall", 1);
-    m_driveChooser.addOption("Burger King", 2);
-    m_driveChooser.addOption("Jaeger", 3);
+    m_driveChooser.setDefaultOption("ArcadeDrive", 0);
+    m_driveChooser.addOption("Tank Drive", 1);
     SmartDashboard.putData("Drive Mode", m_driveChooser);
   }
 
@@ -109,7 +105,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     System.out.println(SmartDashboard.getKeys());
     m_autonomousCommand = m_chooser.getSelected();
-    
   }
 
   /**
@@ -135,8 +130,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     m_driveMode = m_driveChooser.getSelected();
-    Drive.setMode(m_driveMode);
-  
+    Drive.setDriveMode(m_driveMode);
+    System.out.println(m_driveMode);
   }
 
   /**
