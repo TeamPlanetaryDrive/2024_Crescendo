@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 
 public class DriveTrain extends SubsystemBase {
-  private DifferentialDrive robotDrive;
+  private final DifferentialDrive robotDrive;
   private Victor lMotor, rMotor;
   private int driveMode; //0: Arcade, 1: Tank
 

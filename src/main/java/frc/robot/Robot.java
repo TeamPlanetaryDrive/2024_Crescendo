@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
+import frc.robot.util.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,16 +24,23 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 
-  //Declare Subsystems as Instance Variables
-  public static DriveTrain Drive;
-  
+  // Declare bot info
+  public static String name = "ROB";
+  public static Integer year = 2024;
+
+  // Declare bot utilities
+  public static Logger logger;
+
+  // Declare Subsystems as Instance Variables
+  public static DriveTrain drive;
+  public static Shooter shooter;
+
   public static OI m_oi;
 
   private Command m_autonomousCommand;
   private SendableChooser<Command> m_chooser;
 
   private SendableChooser<Integer> m_driveChooser;
-  private int m_driveMode; //0: arcade, 1: tank 
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -40,10 +48,12 @@ public class Robot extends TimedRobot {
    */
 
   public void robotInit() {
+    logger = new Logger(name, year);
+
     RobotMap.init();
-    
+
     //Initialize Subsystems
-    Drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL);
+    drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL);
 
     m_oi = new OI();
 
@@ -129,8 +139,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_driveMode = m_driveChooser.getSelected();
-    Drive.setDriveMode(m_driveMode);
+    //0: arcade, 1: tank
+    int m_driveMode = m_driveChooser.getSelected();
+    drive.setDriveMode(m_driveMode);
     System.out.println(m_driveMode);
   }
 
