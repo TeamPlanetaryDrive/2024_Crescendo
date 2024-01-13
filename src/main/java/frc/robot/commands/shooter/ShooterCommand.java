@@ -5,7 +5,7 @@ import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends Command {
 
-    private Shooter shooter;
+    private final Shooter shooter;
 
     public ShooterCommand(Shooter shooter) {
         this.shooter = shooter;
