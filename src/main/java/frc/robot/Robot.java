@@ -52,12 +52,12 @@ public class Robot extends TimedRobot {
 
     RobotMap.init();
 
-    //Initialize Subsystems
+    // Initialize Subsystems
     drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL);
 
     m_oi = new OI();
 
-    //Example on how we would do this
+    // Example on how we would do this
     m_chooser = new SendableChooser<Command>();
     m_chooser.setDefaultOption("auto1", new ParallelCommandGroup());
     // m_chooser.addOption("auto2", new auto2());
@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during autonomous.
    */
-  //comment
+  // comment
   @Override
   public void autonomousPeriodic() {
     if (m_autonomousCommand != null) {
@@ -139,7 +139,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    //0: arcade, 1: tank
+    // 0: arcade, 1: tank
     int m_driveMode = m_driveChooser.getSelected();
     drive.setDriveMode(m_driveMode);
     System.out.println(m_driveMode);
@@ -151,8 +151,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-    //}
-    
+    // }
+
   }
 
   /**
