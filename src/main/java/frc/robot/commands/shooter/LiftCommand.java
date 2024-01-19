@@ -5,7 +5,7 @@ import frc.robot.subsystems.Shooter;
 
 public class LiftCommand extends Command {
 
-    private final Shooter shooter;
+    private Shooter shooter;
 
     public LiftCommand(Shooter shooter) {
         this.shooter = shooter;
