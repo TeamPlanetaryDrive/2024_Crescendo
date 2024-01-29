@@ -33,7 +33,9 @@ public class Robot extends TimedRobot {
 
   // Declare Subsystems as Instance Variables
   public static DriveTrain drive;
-  public static Shooter shooter;
+  public static ShooterIntake shooter;
+  public static PhotonVision vision;
+  public static Lift lift;
 
   public static OI m_oi;
 
@@ -54,6 +56,13 @@ public class Robot extends TimedRobot {
 
     // Initialize Subsystems
     drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL);
+    shooter = new ShooterIntake(
+      new int[] {RobotMap.LEFT_SHOOTER_CHANNEL, RobotMap.RIGHT_SHOOTER_CHANNEL}, 
+      new int[] {RobotMap.LEFT_INTAKE_CHANNEL, RobotMap.RIGHT_INTAKE_CHANNEL}, 
+      new int[] {RobotMap.LEFT_SHOOTER_SOLENOID_CHANNEL, RobotMap.RIGHT_SHOOTER_SOLENOID_CHANNEL}
+    );
+    vision = new PhotonVision(RobotMap.PI_CAMERA_HEIGHT, RobotMap.PI_CAMERA_PITCH, "photonvision");
+    lift = new Lift(RobotMap.LEFT_LIFT_CHANNEL, RobotMap.RIGHT_LIFT_CHANNEL);
 
     m_oi = new OI();
 

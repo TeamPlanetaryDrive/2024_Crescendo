@@ -6,7 +6,9 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
-// import frc.robot.commands.*;
+import frc.robot.commands.combinedcommands.*;
+import frc.robot.commands.lift.*;
+import frc.robot.commands.shooter.*;
 
 /**
  * This class is what binds the controls on the physical operator
@@ -15,14 +17,16 @@ package frc.robot;
 public class OI {
 
   public OI() {
-    // RobotMap.aButton.onTrue();    
+    RobotMap.aButton.onTrue(new AutomaticallyShoot(
+      Robot.vision, Robot.drive, Robot.shooter, 3, .1
+    ));    
     // RobotMap.bButton.onTrue();
-    // RobotMap.xButton.onTrue();
+    RobotMap.xButton.onTrue(new Intake(Robot.shooter));
     // RobotMap.yButton.onTrue(); 
     // RobotMap.startButton.onTrue();
     // RobotMap.backButton.onTrue();
-    // RobotMap.leftBumper.onTrue();
-    // RobotMap.rightBumper.onTrue();
+    RobotMap.leftBumper.whileTrue(new LiftRetract(Robot.lift));
+    RobotMap.rightBumper.whileTrue(new LiftExtend(Robot.lift));
     
     // RobotMap.leftStickButton.whileTrue();
     // RobotMap.rightStickButton.whileTrue();

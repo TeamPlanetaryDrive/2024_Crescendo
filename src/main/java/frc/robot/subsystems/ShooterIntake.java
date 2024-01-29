@@ -8,31 +8,30 @@ import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
-public class Shooter extends SubsystemBase{
+public class ShooterIntake extends SubsystemBase{
     private final Victor[] mainMotors;
-    private final Victor[] storageMotors;
-    private final Timer timer;
+    private final Victor[] intakeMotors;
     private final DoubleSolenoid shooterLift;
+    private final Timer timer;
 
     private final double SHOOTING_SPEED = 1;
-    private final double INTAKE_SPEED = -1;
-    private final double SLOW_INTAKE_SPEED = -.65;
+    private final double INTAKE_SPEED = .65;
 
-    public Shooter(int[] main, int[] storage, int[] lift) {
-        timer = new Timer();
-
+    public ShooterIntake(int[] main, int[] intake, int[] lift) {
         mainMotors = new Victor[] {
             new Victor(main[0]),
             new Victor(main[1])
         };
 
-        storageMotors = new Victor[] {
-            new Victor(storage[0]),
-            new Victor(storage[1])
+        intakeMotors = new Victor[] {
+            new Victor(intake[0]),
+            new Victor(intake[1])
         };
 
         shooterLift = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, lift[0], lift[1]);
         shooterLift.set(Value.kReverse);
+
+        timer = new Timer();
     }
 
     public void init(String location) {
@@ -42,29 +41,33 @@ public class Shooter extends SubsystemBase{
     public void shoot() {
         mainMotors[0].set(SHOOTING_SPEED);
         mainMotors[1].set(SHOOTING_SPEED);
-        timer.reset();
         timer.start();
-        while(timer.get() <= 1) {}
+        while(timer.get() < 2) {}
         timer.stop();
-        storageMotors[0].set(SHOOTING_SPEED);
-        storageMotors[1].set(SHOOTING_SPEED);
+        intake();
     }
 
     public void intake() {
-        mainMotors[0].set(INTAKE_SPEED);
-        mainMotors[1].set(INTAKE_SPEED);
-        storageMotors[0].set(SLOW_INTAKE_SPEED);
-        storageMotors[1].set(SLOW_INTAKE_SPEED);
+        intakeMotors[0].set(INTAKE_SPEED);
+        intakeMotors[1].set(INTAKE_SPEED);
     }
 
     public void toggleLift() {
         shooterLift.toggle();
     }
 
-    public void stopAllMotors() {
+    public void stopShooterMotors() {
         mainMotors[0].set(0);
         mainMotors[1].set(0);
-        storageMotors[0].set(0);
-        storageMotors[1].set(0);
+    }
+
+    public void stopIntakeMotors() {
+        intakeMotors[0].set(0);
+        intakeMotors[1].set(0);
+    }
+
+    public void stopMotors() {
+        stopShooterMotors();
+        stopIntakeMotors();
     }
 }

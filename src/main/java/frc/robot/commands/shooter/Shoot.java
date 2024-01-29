@@ -2,24 +2,21 @@ package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterIntake;
 
-public class ShooterCommand extends Command {
-
-    private Shooter shooter;
-    private Timer time;
-
-    public ShooterCommand(Shooter shooter) {
+public class Shoot extends Command {
+    private ShooterIntake shooter;
+    private Timer timer;
+    public Shoot(ShooterIntake shooter) {
         this.shooter = shooter;
-
+        timer = new Timer();
         addRequirements(this.shooter);
-    } 
+    }
 
     @Override
     public void initialize() {
-        shooter.init("ShooterCommand");
-        time.start();
         shooter.shoot();
+        timer.start();
     }
 
     @Override
@@ -27,11 +24,11 @@ public class ShooterCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return time.get() >= 2.5;
+        return timer.get() > 3.0;
     }
-
+    
     @Override
-    public void end(boolean interrupted) {
-        shooter.stopAllMotors();
+    public void end(boolean isFinished) {
+        shooter.stopMotors();
     }
 }

@@ -41,6 +41,13 @@ public class RobotMap {
         //public static int LEFT_MOTOR_CHANNEL = 0, RIGHT_MOTOR_CHANNEL = 1;
         // 2022 bot
         public static int LEFT_MOTOR_CHANNEL = 1, RIGHT_MOTOR_CHANNEL = 0;
+        public static int LEFT_SHOOTER_CHANNEL = 2, RIGHT_SHOOTER_CHANNEL = 3;
+        public static int LEFT_INTAKE_CHANNEL = 4, RIGHT_INTAKE_CHANNEL = 5;
+        public static int LEFT_LIFT_CHANNEL = 6, RIGHT_LIFT_CHANNEL = 7;
+
+        public static int LEFT_SHOOTER_SOLENOID_CHANNEL = 0, RIGHT_SHOOTER_SOLENOID_CHANNEL = 1;
+
+        public static double PI_CAMERA_HEIGHT = 5, PI_CAMERA_PITCH = 0;
         
         //Controller
         public static JoystickButton aButton, bButton, xButton, yButton, backButton, startButton, leftBumper, rightBumper, leftStickButton, rightStickButton;
