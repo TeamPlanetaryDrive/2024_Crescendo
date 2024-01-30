@@ -4,19 +4,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PhotonVision;
 
-public class TurnToSpeaker extends Command{
+public class TurnToAmp extends Command{
     private PhotonVision photonVision;
     private DriveTrain drive;
 
-    private final int APRIL_TAG_ID_SPEAKER_BLUE = 7;
-    private final int APRIL_TAG_ID_SPEAKER_RED = 4;
+    private final int APRIL_TAG_ID_AMP_BLUE = 6;
+    private final int APRIL_TAG_ID_AMP_RED = 5;
 
     private final double[] ACCEPTABLE_AIMING_RANGE = {-5., 5.}; //test for later!
 
     private double speed;
     private double currentYaw;
 
-    public TurnToSpeaker(PhotonVision photonVision, DriveTrain drive) {
+    public TurnToAmp(PhotonVision photonVision, DriveTrain drive) {
         this.photonVision = photonVision;
         this.drive = drive;
 
@@ -25,12 +25,12 @@ public class TurnToSpeaker extends Command{
 
     @Override
     public void initialize() {
-    
+        
     }
 
     @Override 
     public void execute() {
-        currentYaw = photonVision.getYaw(APRIL_TAG_ID_SPEAKER_BLUE, APRIL_TAG_ID_SPEAKER_RED);
+        currentYaw = photonVision.getYaw(APRIL_TAG_ID_AMP_BLUE, APRIL_TAG_ID_AMP_RED);
         if(currentYaw != Integer.MIN_VALUE) {
             speed = -Math.signum(currentYaw)/2; // check this too
             drive.arcadeDrive(0, speed);

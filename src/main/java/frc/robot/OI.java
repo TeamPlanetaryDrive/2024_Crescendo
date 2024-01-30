@@ -17,10 +17,12 @@ import frc.robot.commands.shooter.*;
 public class OI {
 
   public OI() {
-    RobotMap.aButton.onTrue(new AutomaticallyShoot(
+    RobotMap.aButton.onTrue(new AutomaticallyShootShooter(
       Robot.vision, Robot.drive, Robot.shooter, 3, .1
-    ));    
-    // RobotMap.bButton.onTrue();
+    ));   
+    RobotMap.bButton.onTrue(new AutomaticallyShootAmp(
+      Robot.vision, Robot.drive, Robot.shooter, 1, .1
+    ));
     RobotMap.xButton.onTrue(new Intake(Robot.shooter));
     // RobotMap.yButton.onTrue(); 
     // RobotMap.startButton.onTrue();

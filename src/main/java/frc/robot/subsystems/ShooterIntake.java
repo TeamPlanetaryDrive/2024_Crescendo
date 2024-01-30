@@ -56,6 +56,14 @@ public class ShooterIntake extends SubsystemBase{
         shooterLift.toggle();
     }
 
+    public void liftDown() {
+        shooterLift.set(Value.kReverse);
+    }
+
+    public void liftUp() {
+        shooterLift.set(Value.kForward);
+    }
+
     public void stopShooterMotors() {
         mainMotors[0].set(0);
         mainMotors[1].set(0);

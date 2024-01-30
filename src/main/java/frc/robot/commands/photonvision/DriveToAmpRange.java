@@ -5,19 +5,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PhotonVision;
 
-public class DriveToSpeakerRange extends Command {
+public class DriveToAmpRange extends Command {
     private PhotonVision photonVision;
     private DriveTrain drive;
 
-    private final int APRIL_TAG_ID_SPEAKER_BLUE = 7;
-    private final int APRIL_TAG_ID_SPEAKER_RED = 4;
+    private final int APRIL_TAG_ID_AMP_BLUE = 6;
+    private final int APRIL_TAG_ID_AMP_RED = 5;
     private final double[] ACCEPTABLE_DISTANCES;
-    private final double SPEAKER_HEIGHT_METERS = Units.inchesToMeters(51.875);
+    private final double AMP_HEIGHT_METERS = Units.inchesToMeters(48.125);
 
     private double speed;
     private double currentRange;
 
-    public DriveToSpeakerRange(PhotonVision photonVision, DriveTrain drive, double distanceToSpeakerMeters, double acceptableErrorMeters) {
+    public DriveToAmpRange(PhotonVision photonVision, DriveTrain drive, double distanceToSpeakerMeters, double acceptableErrorMeters) {
         this.photonVision = photonVision;
         this.drive = drive;
         ACCEPTABLE_DISTANCES = new double[] {distanceToSpeakerMeters-acceptableErrorMeters, distanceToSpeakerMeters+acceptableErrorMeters};
@@ -25,12 +25,12 @@ public class DriveToSpeakerRange extends Command {
 
     @Override
     public void initialize() {
-        
+
     }
 
     @Override
     public void execute() {
-        currentRange = photonVision.getDistanceToTargetMeters(APRIL_TAG_ID_SPEAKER_BLUE, APRIL_TAG_ID_SPEAKER_RED, SPEAKER_HEIGHT_METERS);
+        currentRange = photonVision.getDistanceToTargetMeters(APRIL_TAG_ID_AMP_BLUE, APRIL_TAG_ID_AMP_RED, AMP_HEIGHT_METERS);
         if(currentRange != -1) {
             speed = -Math.signum(currentRange)/2;
             drive.arcadeDrive(speed, 0);
