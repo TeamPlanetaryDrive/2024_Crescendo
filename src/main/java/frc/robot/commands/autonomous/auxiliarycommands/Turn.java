@@ -1,28 +1,22 @@
 package frc.robot.commands.autonomous.auxiliarycommands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 
 public class Turn extends Command {
     private DriveTrain drive;
-    private Timer timer;
     private int multiplier;
+    private double angleDegrees;
 
-    public Turn(DriveTrain drive, boolean right) {
+    public Turn(DriveTrain drive, boolean right, double angleDegrees) {
         this.drive = drive;
-        timer = new Timer();
-        if(right) {
-            multiplier = -1;
-        }
-        else {
-            multiplier = 1;
-        }
+        multiplier = right ? -1 : 1;
+        this.angleDegrees = angleDegrees;
         addRequirements(this.drive);
     }
 
     public void initialize() {
-        timer.start();
+        drive.resetGyro();
     }
 
     public void execute() {
@@ -30,10 +24,11 @@ public class Turn extends Command {
     }
 
     public boolean isFinished() {
-        return timer.get() > .75;
+        return Math.round(Math.abs(drive.getAngle())) == Math.abs(angleDegrees)
+                || Math.round(Math.abs(360-drive.getAngle())) == Math.abs(angleDegrees);
     }
 
     public void end(boolean interrupted) {
-        timer.stop();
+        drive.arcadeDrive(0, 0);
     }
 }

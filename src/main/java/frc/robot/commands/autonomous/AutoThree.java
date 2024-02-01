@@ -18,15 +18,15 @@ public class AutoThree extends SequentialCommandGroup {
             if(alliance == DriverStation.Alliance.Blue) {
                 addCommands(
                     new DriveBack(drive),
-                    new Turn(drive, true),
-                    new AutomaticallyShootAmp(photonVision, drive, shooter, distanceToSpeaker, acceptableError)
+                    new Turn(drive, true, 90),
+                    new AutomaticallyShootAmp(photonVision, drive, shooter)
                 );
             }
             else if(alliance == DriverStation.Alliance.Red) {
                 addCommands(
                     new DriveBack(drive),
-                    new Turn(drive, false),
-                    new AutomaticallyShootAmp(photonVision, drive, shooter, distanceToSpeaker, acceptableError)
+                    new Turn(drive, false, 90),
+                    new AutomaticallyShootAmp(photonVision, drive, shooter)
                 );
             }
             else {

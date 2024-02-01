@@ -23,7 +23,7 @@ public class DriveBack extends Command {
     }
 
     public boolean isFinished() {
-        return timer.get() > 1.25;
+        return false;
     }
 
     public void end(boolean interrupted) {

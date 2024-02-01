@@ -55,13 +55,13 @@ public class Robot extends TimedRobot {
     RobotMap.init();
 
     // Initialize Subsystems
-    drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL);
+    drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL, RobotMap.LEFT_DRIVE_ENCODER_CHANNELS, RobotMap.RIGHT_DRIVE_ENCODER_CHANNELS);
     shooter = new ShooterIntake(
       new int[] {RobotMap.LEFT_SHOOTER_CHANNEL, RobotMap.RIGHT_SHOOTER_CHANNEL}, 
       new int[] {RobotMap.LEFT_INTAKE_CHANNEL, RobotMap.RIGHT_INTAKE_CHANNEL}, 
       new int[] {RobotMap.LEFT_SHOOTER_SOLENOID_CHANNEL, RobotMap.RIGHT_SHOOTER_SOLENOID_CHANNEL}
     );
-    vision = new PhotonVision(RobotMap.PI_CAMERA_HEIGHT, RobotMap.PI_CAMERA_PITCH, "photonvision");
+    vision = new PhotonVision(-1, -1, "photonvision");
     lift = new Lift(RobotMap.LEFT_LIFT_CHANNEL, RobotMap.RIGHT_LIFT_CHANNEL);
 
     m_oi = new OI();
@@ -151,7 +151,7 @@ public class Robot extends TimedRobot {
     // 0: arcade, 1: tank
     int m_driveMode = m_driveChooser.getSelected();
     drive.setDriveMode(m_driveMode);
-    System.out.println(m_driveMode);
+    drive.setDefaultCommand(drive.getDefaultCommand());
   }
 
   /**

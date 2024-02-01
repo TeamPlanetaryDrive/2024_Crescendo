@@ -12,7 +12,7 @@ public class AutoTwo extends SequentialCommandGroup {
         addRequirements(photonVision, drive, shooter);
         addCommands(
             new DriveBack(drive),
-            new AutomaticallyShootShooter(photonVision, drive, shooter, distanceToSpeaker, acceptableError)
+            new AutomaticallyShootShooter(photonVision, drive, shooter)
         );
     }
 }

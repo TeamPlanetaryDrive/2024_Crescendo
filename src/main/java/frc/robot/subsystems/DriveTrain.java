@@ -8,38 +8,36 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.commands.drivetraincommands.DriveCommand;
 
 public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive robotDrive;
   private Victor lMotor, rMotor;
-  private int driveMode; //0: Arcade, 1: Tank
+  private Encoder lEncoder, rEncoder;
+  private ADXRS450_Gyro angleGyro;
+  private int driveMode = 1; //0: Arcade, 1: Tank
 
-  public DriveTrain(int leftMotor, int rightMotor) {
+  public DriveTrain(int leftMotor, int rightMotor, int[] leftEncoder, int[] rightEncoder) {
     super();
     lMotor = new Victor(leftMotor);
     rMotor = new Victor(rightMotor);
     rMotor.setInverted(true);
     robotDrive = new DifferentialDrive(lMotor, rMotor);
-  }
 
-  public void periodic() {
-    if(driveMode == 1) {
-      double left = -RobotMap.XController.getLeftY();
-      double right = -RobotMap.XController.getRightY();
+    lEncoder = new Encoder(leftEncoder[0], leftEncoder[1]);
+    rEncoder = new Encoder(rightEncoder[0], rightEncoder[1]);
 
-      if(Math.round(left * 8) != 0 || Math.round(right * 8) != 0)
-        robotDrive.tankDrive(left, right);
-    }
-    else {
-      double yax = -RobotMap.XController.getLeftY();
-      double xax = -RobotMap.XController.getLeftX();
-      if(Math.round(yax * 8) != 0 || Math.round(xax * 8) != 0)
-        robotDrive.arcadeDrive(yax, xax);
-    }
-    
+    lEncoder.setDistancePerPulse(4.0/256.0); //adjust
+    lEncoder.setReverseDirection(true); //adjust
+    rEncoder.setDistancePerPulse(4.0/256.0); //adjust
+
+    angleGyro = new ADXRS450_Gyro();
+    angleGyro.calibrate();
   }
 
   public void setDriveMode(int mode) {
@@ -48,5 +46,30 @@ public class DriveTrain extends SubsystemBase {
 
   public void arcadeDrive(double forward, double rotation) {
     robotDrive.arcadeDrive(forward, rotation);
+  }
+
+  public void tankDrive(double left, double right) {
+    robotDrive.tankDrive(left, right);
+  }
+
+  public void resetEncoders() {
+    lEncoder.reset();
+    rEncoder.reset();
+  }
+
+  public double getAverageDistance() {
+    return (lEncoder.getDistance() + rEncoder.getDistance())/2;
+  }
+
+  public void resetGyro() {
+    angleGyro.reset();
+  }
+
+  public double getAngle() {
+    return angleGyro.getAngle();
+  }
+
+  public Command getDefaultCommand() {
+    return new DriveCommand(this, driveMode);
   }
 }

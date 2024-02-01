@@ -22,7 +22,7 @@ public class Intake extends Command {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
     
     @Override

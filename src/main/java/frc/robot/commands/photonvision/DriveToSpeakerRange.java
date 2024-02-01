@@ -11,39 +11,36 @@ public class DriveToSpeakerRange extends Command {
 
     private final int APRIL_TAG_ID_SPEAKER_BLUE = 7;
     private final int APRIL_TAG_ID_SPEAKER_RED = 4;
-    private final double[] ACCEPTABLE_DISTANCES;
+    private final double SHOOTING_DISTANCE_TO_SPEAKER_FEET = -1;
     private final double SPEAKER_HEIGHT_METERS = Units.inchesToMeters(51.875);
 
     private double speed;
-    private double currentRange;
+    private double range;
 
-    public DriveToSpeakerRange(PhotonVision photonVision, DriveTrain drive, double distanceToSpeakerMeters, double acceptableErrorMeters) {
+    public DriveToSpeakerRange(PhotonVision photonVision, DriveTrain drive) {
         this.photonVision = photonVision;
         this.drive = drive;
-        ACCEPTABLE_DISTANCES = new double[] {distanceToSpeakerMeters-acceptableErrorMeters, distanceToSpeakerMeters+acceptableErrorMeters};
+        addRequirements(this.photonVision, this.drive);
     }
 
     @Override
     public void initialize() {
-        
+        range = photonVision.getDistanceToTargetMeters(APRIL_TAG_ID_SPEAKER_BLUE, APRIL_TAG_ID_SPEAKER_RED, SPEAKER_HEIGHT_METERS);
+        if(range != -1) {
+            speed = -Math.signum(range)/2;
+        }
+        range = Units.metersToFeet(range);
+        drive.resetEncoders();
     }
 
     @Override
     public void execute() {
-        currentRange = photonVision.getDistanceToTargetMeters(APRIL_TAG_ID_SPEAKER_BLUE, APRIL_TAG_ID_SPEAKER_RED, SPEAKER_HEIGHT_METERS);
-        if(currentRange != -1) {
-            speed = -Math.signum(currentRange)/2;
-            drive.arcadeDrive(speed, 0);
-        }
-        else {
-            drive.arcadeDrive(0, 0);
-        }
+        drive.arcadeDrive(speed, 0);
     }
 
     @Override
     public boolean isFinished() {
-        boolean inRange = currentRange > ACCEPTABLE_DISTANCES[0] && currentRange < ACCEPTABLE_DISTANCES[1];
-        return currentRange == -1 || inRange;
+        return range == -1 || drive.getAverageDistance() > SHOOTING_DISTANCE_TO_SPEAKER_FEET;
     }
 
     @Override
