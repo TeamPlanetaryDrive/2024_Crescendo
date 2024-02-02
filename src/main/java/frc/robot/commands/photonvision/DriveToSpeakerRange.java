@@ -2,6 +2,7 @@ package frc.robot.commands.photonvision;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PhotonVision;
 
@@ -9,10 +10,10 @@ public class DriveToSpeakerRange extends Command {
     private PhotonVision photonVision;
     private DriveTrain drive;
 
-    private final int APRIL_TAG_ID_SPEAKER_BLUE = 7;
-    private final int APRIL_TAG_ID_SPEAKER_RED = 4;
-    private final double SHOOTING_DISTANCE_TO_SPEAKER_FEET = -1;
-    private final double SPEAKER_HEIGHT_METERS = Units.inchesToMeters(51.875);
+    private final int APRIL_TAG_ID_SPEAKER_BLUE = Constants.kAPRIL_TAG_ID_SPEAKER_BLUE;
+    private final int APRIL_TAG_ID_SPEAKER_RED = Constants.kAPRIL_TAG_ID_SPEAKER_RED;
+    private final double SHOOTING_DISTANCE_TO_SPEAKER_FEET = Constants.kSHOOTING_DISTANCE_TO_SPEAKER_FEET;
+    private final double SPEAKER_HEIGHT_METERS = Constants.kSPEAKER_HEIGHT_METERS;
 
     private double speed;
     private double range;

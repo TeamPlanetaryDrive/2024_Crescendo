@@ -1,4 +1,4 @@
-package frc.robot.subsystems.swervedrive;
+package frc.robot.util.swervedrive;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -6,13 +6,12 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.util.swervedrive.Constants.DriveConstants;
+import frc.robot.util.swervedrive.Constants.ModuleConstants;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-
-import frc.robot.subsystems.swervedrive.Constants.DriveConstants;
-import frc.robot.subsystems.swervedrive.Constants.ModuleConstants;
 
 public class SwerveModule {
     private CANSparkMax driveMotor;

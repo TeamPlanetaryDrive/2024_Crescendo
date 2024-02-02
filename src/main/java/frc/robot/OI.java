@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
-import frc.robot.commands.combinedcommands.*;
 import frc.robot.commands.lift.*;
 import frc.robot.commands.shooter.*;
 
@@ -16,11 +15,14 @@ import frc.robot.commands.shooter.*;
  */
 public class OI {
 
+  /**
+   * Maps each XBox controller button onto a command if needed
+   */
   public OI() {
     RobotMap.aButton.onTrue(new AutomaticallyShootShooter(Robot.vision, Robot.drive, Robot.shooter));   
     RobotMap.bButton.onTrue(new AutomaticallyShootAmp(Robot.vision, Robot.drive, Robot.shooter));
     RobotMap.xButton.whileTrue(new Intake(Robot.shooter));
-    // RobotMap.yButton.onTrue(); 
+    RobotMap.yButton.onTrue(new ShooterToggleUpDown(Robot.shooter)); 
     // RobotMap.startButton.onTrue();
     // RobotMap.backButton.onTrue();
     RobotMap.leftBumper.whileTrue(new LiftRetract(Robot.lift));

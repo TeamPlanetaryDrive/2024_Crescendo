@@ -8,18 +8,17 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class PhotonVision extends SubsystemBase {
-    private final double CAMERA_HEIGHT_METERS;
+    private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(Constants.kCAMERA_HEIGHT_METERS);
 
-    private final double CAMERA_PITCH_RADIANS;
+    private final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(Constants.kCAMERA_PITCH_RADIANS);
 
     private PhotonCamera camera;
 
-    public PhotonVision(double cameraHeightInches, double cameraPitchDegrees, String photonCameraName) {
-        CAMERA_HEIGHT_METERS = Units.inchesToMeters(cameraHeightInches);
-        CAMERA_PITCH_RADIANS = Units.degreesToRadians(cameraPitchDegrees);
-        camera = new PhotonCamera(photonCameraName);
+    public PhotonVision() {
+        camera = new PhotonCamera(Constants.kPHOTONVISION_CAMERA_NAME);
     }
 
     /**

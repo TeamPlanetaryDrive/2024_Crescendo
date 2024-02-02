@@ -1,11 +1,9 @@
-package frc.robot.commands.combinedcommands;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.photonvision.DriveToAmpRange;
 import frc.robot.commands.photonvision.TurnToAmp;
-import frc.robot.commands.shooter.Shoot;
-import frc.robot.commands.shooter.ShooterDown;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PhotonVision;
 import frc.robot.subsystems.ShooterIntake;

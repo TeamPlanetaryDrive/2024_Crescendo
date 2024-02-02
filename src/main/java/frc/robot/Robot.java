@@ -9,9 +9,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.autonomous.AutoOne;
+import frc.robot.commands.autonomous.AutoThree;
+import frc.robot.commands.autonomous.AutoTwo;
 import frc.robot.subsystems.*;
 import frc.robot.util.Logger;
 
@@ -25,7 +27,7 @@ import frc.robot.util.Logger;
 public class Robot extends TimedRobot {
 
   // Declare bot info
-  public static String name = "ROB";
+  public static String name = "Wayne's Bot";
   public static Integer year = 2024;
 
   // Declare bot utilities
@@ -41,6 +43,7 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private SendableChooser<Command> m_chooser;
+  private Command autoOne, autoTwo, autoThree;
 
   private SendableChooser<Integer> m_driveChooser;
 
@@ -61,21 +64,29 @@ public class Robot extends TimedRobot {
       new int[] {RobotMap.LEFT_INTAKE_CHANNEL, RobotMap.RIGHT_INTAKE_CHANNEL}, 
       new int[] {RobotMap.LEFT_SHOOTER_SOLENOID_CHANNEL, RobotMap.RIGHT_SHOOTER_SOLENOID_CHANNEL}
     );
-    vision = new PhotonVision(-1, -1, "photonvision");
+    vision = new PhotonVision();
     lift = new Lift(RobotMap.LEFT_LIFT_CHANNEL, RobotMap.RIGHT_LIFT_CHANNEL);
 
     m_oi = new OI();
 
-    // Example on how we would do this
+    autoOne = new AutoOne(drive);
+    autoTwo = new AutoTwo(vision, drive, shooter);
+    autoThree = new AutoThree(vision, drive, shooter);
     m_chooser = new SendableChooser<Command>();
-    m_chooser.setDefaultOption("auto1", new ParallelCommandGroup());
-    // m_chooser.addOption("auto2", new auto2());
-    // m_chooser.addOption("auto3", new auto3());
+
+    /* 
+     * One --> Drive Back
+     * Two --> Drive Back + Speaker Shoot 
+     * Three --> Drive Back + Amp Shoot
+     */
+    m_chooser.setDefaultOption("Drive Back", autoOne);
+    m_chooser.addOption("Drive Back & Speaker Score", autoTwo);
+    m_chooser.addOption("Drive Back & Auto Score", autoThree);
     SmartDashboard.putData("Auto mode", m_chooser);
 
     m_driveChooser = new SendableChooser<Integer>();
-    m_driveChooser.setDefaultOption("ArcadeDrive", 0);
-    m_driveChooser.addOption("Tank Drive", 1);
+    m_driveChooser.setDefaultOption("Tank Drive", 1);
+    m_driveChooser.addOption("Arcade Drive", 0);
     SmartDashboard.putData("Drive Mode", m_driveChooser);
   }
 
@@ -99,14 +110,10 @@ public class Robot extends TimedRobot {
    * robot is disabled.
    */
   @Override
-  public void disabledInit() {
-  }
+  public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {
-    SmartDashboard.updateValues();
-    CommandScheduler.getInstance().run();
-  }
+  public void disabledPeriodic() {}
 
   /**
    * This autonomous (along with the chooser code above) shows how to select
@@ -124,6 +131,10 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     System.out.println(SmartDashboard.getKeys());
     m_autonomousCommand = m_chooser.getSelected();
+    
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
   }
 
   /**
@@ -131,13 +142,7 @@ public class Robot extends TimedRobot {
    */
   // comment
   @Override
-  public void autonomousPeriodic() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
-    CommandScheduler.getInstance().run();
-    m_autonomousCommand = null;
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {
@@ -150,6 +155,8 @@ public class Robot extends TimedRobot {
     }
     // 0: arcade, 1: tank
     int m_driveMode = m_driveChooser.getSelected();
+
+    //Sets the default command of drive
     drive.setDriveMode(m_driveMode);
     drive.setDefaultCommand(drive.getDefaultCommand());
   }
@@ -159,8 +166,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    CommandScheduler.getInstance().run();
-    // }
 
   }
 

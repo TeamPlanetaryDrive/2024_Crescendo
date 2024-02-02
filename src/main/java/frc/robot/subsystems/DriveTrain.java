@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
+import frc.robot.Constants;
 import frc.robot.commands.drivetraincommands.DriveCommand;
 
 public class DriveTrain extends SubsystemBase {
@@ -21,6 +22,9 @@ public class DriveTrain extends SubsystemBase {
   private Encoder lEncoder, rEncoder;
   private ADXRS450_Gyro angleGyro;
   private int driveMode = 1; //0: Arcade, 1: Tank
+
+  private final double LEFT_FEET_PER_PULSE = Constants.kLEFT_ENCODER_FEET_PER_PULSE;
+  private final double RIGHT_FEET_PER_PULSE = Constants.kRIGHT_ENCODER_FEET_PER_PULSE_FEET;
 
   public DriveTrain(int leftMotor, int rightMotor, int[] leftEncoder, int[] rightEncoder) {
     super();
@@ -32,9 +36,9 @@ public class DriveTrain extends SubsystemBase {
     lEncoder = new Encoder(leftEncoder[0], leftEncoder[1]);
     rEncoder = new Encoder(rightEncoder[0], rightEncoder[1]);
 
-    lEncoder.setDistancePerPulse(4.0/256.0); //adjust
-    lEncoder.setReverseDirection(true); //adjust
-    rEncoder.setDistancePerPulse(4.0/256.0); //adjust
+    lEncoder.setDistancePerPulse(LEFT_FEET_PER_PULSE); 
+    lEncoder.setReverseDirection(true); 
+    rEncoder.setDistancePerPulse(RIGHT_FEET_PER_PULSE); 
 
     angleGyro = new ADXRS450_Gyro();
     angleGyro.calibrate();

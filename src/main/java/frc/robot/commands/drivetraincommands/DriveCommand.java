@@ -2,6 +2,7 @@ package frc.robot.commands.drivetraincommands;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.DriveTrain;
 
@@ -10,7 +11,7 @@ public class DriveCommand extends Command {
     private int driveMode;
     private SlewRateLimiter lAccelLimiter, rAccelLimiter;
 
-    private final double MAX_ACCEL_METERS_PER_SECOND = 3.5;
+    private final double MAX_ACCEL_METERS_PER_SECOND = Constants.kMAX_ACCELERATION_METERS_PER_SECOND;
     
     public DriveCommand(DriveTrain drive, int driveMode) {
         this.drive = drive;

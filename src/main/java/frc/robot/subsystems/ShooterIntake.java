@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class ShooterIntake extends SubsystemBase{
@@ -14,8 +15,8 @@ public class ShooterIntake extends SubsystemBase{
     private final DoubleSolenoid shooterLift;
     private final Timer timer;
 
-    private final double SHOOTING_SPEED = 1;
-    private final double INTAKE_SPEED = .65;
+    private final double SHOOTING_SPEED = Constants.kSHOOTING_SPEED;
+    private final double INTAKE_SPEED = Constants.kINTAKE_SPEED;
 
     public ShooterIntake(int[] main, int[] intake, int[] lift) {
         mainMotors = new Victor[] {

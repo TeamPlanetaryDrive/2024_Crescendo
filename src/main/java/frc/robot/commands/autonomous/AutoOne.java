@@ -9,7 +9,7 @@ public class AutoOne extends SequentialCommandGroup{
         addRequirements(drive);
 
         addCommands(
-            new DriveBack(drive)
+            new DriveBack(drive).withTimeout(1.25)
         );
     }
 }

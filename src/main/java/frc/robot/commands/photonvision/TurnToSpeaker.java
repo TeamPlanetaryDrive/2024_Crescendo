@@ -1,6 +1,7 @@
 package frc.robot.commands.photonvision;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.PhotonVision;
 
@@ -8,8 +9,8 @@ public class TurnToSpeaker extends Command{
     private PhotonVision photonVision;
     private DriveTrain drive;
 
-    private final int APRIL_TAG_ID_AMP_BLUE = 7;
-    private final int APRIL_TAG_ID_AMP_RED = 4;
+    private final int APRIL_TAG_ID_AMP_BLUE = Constants.kAPRIL_TAG_ID_SPEAKER_BLUE;
+    private final int APRIL_TAG_ID_AMP_RED = Constants.kAPRIL_TAG_ID_SPEAKER_RED;
 
     private double speed;
     private double yaw;
@@ -36,7 +37,7 @@ public class TurnToSpeaker extends Command{
 
     @Override
     public boolean isFinished() {
-        return Math.round(Math.abs(drive.getAngle())) == Math.abs(yaw) ||
+        return yaw == Integer.MIN_VALUE || Math.round(Math.abs(drive.getAngle())) == Math.abs(yaw) ||
                 Math.round(Math.abs(360-drive.getAngle())) == Math.abs(yaw);
     }
 
