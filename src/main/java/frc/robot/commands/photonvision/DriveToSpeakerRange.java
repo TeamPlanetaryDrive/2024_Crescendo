@@ -28,9 +28,12 @@ public class DriveToSpeakerRange extends Command {
     public void initialize() {
         range = photonVision.getDistanceToTargetMeters(APRIL_TAG_ID_SPEAKER_BLUE, APRIL_TAG_ID_SPEAKER_RED, SPEAKER_HEIGHT_METERS);
         if(range != -1) {
-            speed = -Math.signum(range)/2;
+            speed = .5;
         }
         range = Units.metersToFeet(range);
+        if(range < SHOOTING_DISTANCE_TO_SPEAKER_FEET) {
+            range *= -1;
+        }
         drive.resetEncoders();
     }
 
@@ -41,7 +44,7 @@ public class DriveToSpeakerRange extends Command {
 
     @Override
     public boolean isFinished() {
-        return range == -1 || drive.getAverageDistance() > SHOOTING_DISTANCE_TO_SPEAKER_FEET;
+        return range == -1 || Math.abs(drive.getAverageDistance()) > SHOOTING_DISTANCE_TO_SPEAKER_FEET;
     }
 
     @Override

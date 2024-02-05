@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
 public class Constants {
@@ -24,9 +25,23 @@ public class Constants {
     public static final double kINTAKE_SPEED = .65;
 
     //Drive Constants
-    public static final double kMAX_ACCELERATION_METERS_PER_SECOND = 3.5;
+    public static final double kAUTO_MAX_SPEED_METERS_PER_SECOND = 10;
+    public static final double kAUTO_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 1;
+    public static final double kMAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
     public static final double kLEFT_ENCODER_FEET_PER_PULSE = 4./256.;
     public static final double kRIGHT_ENCODER_FEET_PER_PULSE_FEET = 4./256.;
+
+    public static final double ksVOLTS = 0;
+    public static final double kvVOLT_SECONDS_PER_METER = 0;
+    public static final double kaVOLT_SECONDS_SQUARED_PER_METER = 0;
+
+    public static final double kP_DRIVE_VELOCITY = 0;
+
+    public static final double kTrackWidthMeters = .5334;
+    public static final DifferentialDriveKinematics kDRIVE_KINEMATICS = new DifferentialDriveKinematics(kTrackWidthMeters);
+
+    public static final double kRAMSETE_B = 2;
+    public static final double kRAMSETE_ZETA = .7;
 
     //Lift Constants
     public static final double kLIFT_SPEED = 0.6;

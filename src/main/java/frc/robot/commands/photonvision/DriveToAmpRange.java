@@ -28,9 +28,12 @@ public class DriveToAmpRange extends Command {
     public void initialize() {
         range = photonVision.getDistanceToTargetMeters(APRIL_TAG_ID_AMP_RED, APRIL_TAG_ID_AMP_BLUE, AMP_HEIGHT_METERS);
         if(range != -1) {
-            speed = -Math.signum(range)/2;
+            speed = .5;
         }
         range = Units.metersToFeet(range);
+        if(range < SHOOTING_DISTANCE_TO_AMP_FEET) {
+            speed *= -1;
+        }
         drive.resetEncoders();
     }
 
@@ -41,7 +44,7 @@ public class DriveToAmpRange extends Command {
 
     @Override
     public boolean isFinished() {
-        return range == -1 || drive.getAverageDistance() > SHOOTING_DISTANCE_TO_AMP_FEET;
+        return range == -1 || Math.abs(drive.getAverageDistance()) > SHOOTING_DISTANCE_TO_AMP_FEET;
     }
 
     @Override

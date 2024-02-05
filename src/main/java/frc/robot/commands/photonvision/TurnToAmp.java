@@ -25,7 +25,7 @@ public class TurnToAmp extends Command{
     public void initialize() {
         yaw = photonVision.getYaw(APRIL_TAG_ID_AMP_BLUE, APRIL_TAG_ID_AMP_RED);
         if(yaw != Integer.MIN_VALUE) {
-            speed = -Math.signum(yaw)/2; // check this too
+            speed = -Math.signum(yaw)/2.0; // check this too
         }
         drive.resetGyro();
     }
