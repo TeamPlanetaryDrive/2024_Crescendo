@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
