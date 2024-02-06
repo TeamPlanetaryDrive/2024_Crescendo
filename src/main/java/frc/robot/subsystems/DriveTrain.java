@@ -52,11 +52,13 @@ public class DriveTrain extends SubsystemBase {
   private final double LEFT_METERS_PER_PULSE = Units.feetToMeters(Constants.kLEFT_ENCODER_FEET_PER_PULSE);
   private final double RIGHT_METERS_PER_PULSE = Units.feetToMeters(Constants.kRIGHT_ENCODER_FEET_PER_PULSE_FEET);
 
-  public DriveTrain(int leftMotor, int rightMotor, int[] leftEncoder, int[] rightEncoder) {
+  public DriveTrain(int leftMotorOne, int leftMotorTwo, int rightMotorOne, int rightMotorTwo, int[] leftEncoder, int[] rightEncoder) {
     super();
-    lMotor = new Victor(leftMotor);
-    rMotor = new Victor(rightMotor);
-    rMotor.setInverted(true);
+    lMotor = new Victor(leftMotorOne);
+    lMotor.addFollower(new Victor(leftMotorTwo));
+
+    rMotor = new Victor(rightMotorOne);
+    rMotor.addFollower(new Victor(rightMotorTwo));
     robotDrive = new DifferentialDrive(lMotor, rMotor);
 
     lEncoder = new Encoder(leftEncoder[0], leftEncoder[1]);
@@ -193,7 +195,7 @@ public class DriveTrain extends SubsystemBase {
       () -> getWheelSpeeds(),
       new PIDController(Constants.kP_DRIVE_VELOCITY, 0, 0),
       new PIDController(Constants.kP_DRIVE_VELOCITY, 0, 0),
-      (left, right) -> tankDrive(left, right),
+      (left, right) -> tankDriveVolts(left, right),
       this
     );
     
