@@ -4,16 +4,13 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.swervedrive.SwerveSubsystem;
 import frc.robot.util.swervedrive.Constants.DriveConstants;
-import edu.wpi.first.wpilibj.Encoder;
 
 public class SwerveDriveForwardX extends Command {
     private float speed;
     private SwerveSubsystem swerveSubsystem;
     private SwerveModuleState[] swerveModuleStates;
-    private double distanceToTravel;
     public SwerveDriveForwardX(SwerveSubsystem swerveSubsystem, float speed, boolean isForwards, double distanceToTravel) {
 
-        this.distanceToTravel = distanceToTravel;
         if (isForwards) {
             this.speed = speed;
         } else {

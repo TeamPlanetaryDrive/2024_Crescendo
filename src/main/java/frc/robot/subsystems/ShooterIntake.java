@@ -21,8 +21,11 @@ public class ShooterIntake extends SubsystemBase{
     public ShooterIntake(int[] main, int[] intake, int[] lift) {
         mainMotors = new Victor[] {
             new Victor(main[0]),
-            new Victor(main[1])
+            new Victor(main[2])
         };
+
+        mainMotors[0].addFollower(new Victor(1));
+        mainMotors[1].addFollower(new Victor(3));
 
         intakeMotors = new Victor[] {
             new Victor(intake[0]),

@@ -25,7 +25,7 @@ public class RobotMap {
         //public static int LEFT_MOTOR_CHANNEL = 0, RIGHT_MOTOR_CHANNEL = 1;
         // 2022 bot
         public static final int LEFT_MOTOR_CHANNEL_ONE = 0, LEFT_MOTOR_CHANNEL_TWO = 1, RIGHT_MOTOR_CHANNEL_ONE = 2, RIGHT_MOTOR_CHANNEL_TWO = 3;
-        public static final int LEFT_SHOOTER_CHANNEL = 4, RIGHT_SHOOTER_CHANNEL = 5;
+        public static final int LEFT_SHOOTER_CHANNEL_ONE = 4, LEFT_SHOOTER_CHANNEL_TWO = 10, RIGHT_SHOOTER_CHANNEL_ONE = 5, RIGHT_SHOOTER_CHANNEL_TWO = 11;
         public static final int LEFT_INTAKE_CHANNEL = 6, RIGHT_INTAKE_CHANNEL = 7;
         public static final int LEFT_LIFT_CHANNEL = 8, RIGHT_LIFT_CHANNEL = 9;
 
