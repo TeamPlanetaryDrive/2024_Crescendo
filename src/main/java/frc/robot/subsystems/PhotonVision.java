@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class PhotonVision extends SubsystemBase {
-    private final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(Constants.kCAMERA_HEIGHT_METERS);
+    private final double CAMERA_HEIGHT_METERS = Constants.kCAMERA_HEIGHT_METERS;
 
     private final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(Constants.kCAMERA_PITCH_RADIANS);
 

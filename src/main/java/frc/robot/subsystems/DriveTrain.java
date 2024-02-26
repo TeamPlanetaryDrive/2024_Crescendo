@@ -31,12 +31,15 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.Voltage;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Filesystem;
 import frc.robot.Constants;
 import frc.robot.commands.drivetraincommands.DriveCommand;
+import static edu.wpi.first.units.Units.Volts;
 
 public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive robotDrive;
@@ -112,6 +115,12 @@ public class DriveTrain extends SubsystemBase {
   public void tankDriveVolts(double leftV, double rightV) {
     lMotor.setVoltage(leftV);
     rMotor.setVoltage(rightV);
+    robotDrive.feed();
+  }
+
+  public void driveVoltsSysID(Measure<Voltage> V) {
+    lMotor.setVoltage(V.in(Volts));
+    rMotor.setVoltage(V.in(Volts));
     robotDrive.feed();
   }
 
