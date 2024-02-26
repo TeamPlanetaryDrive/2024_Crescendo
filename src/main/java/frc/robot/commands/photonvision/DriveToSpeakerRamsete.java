@@ -16,7 +16,9 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -24,7 +26,7 @@ public class DriveToSpeakerRamsete {
     private static final Pose2d RED_SPEAKER_POSE = new Pose2d(15, 5.5, new Rotation2d(0));
     private static final Pose2d BLUE_SPEAKER_POSE = new Pose2d(2, 5.5, new Rotation2d(Math.PI));
 
-    public static RamseteCommand getCommand() {
+    public static SequentialCommandGroup getCommand() {
         Pose3d currentPose;
         try{
             currentPose = Robot.vision.getPoseEstimator().update().get().estimatedPose;
@@ -82,7 +84,8 @@ public class DriveToSpeakerRamsete {
             Robot.drive::tankDrive,
             Robot.drive
         );
-    
-        return ramseteCommand;    
+
+        return Commands.runOnce(() -> Robot.drive.resetOdometry(newTraj.getInitialPose()))
+        .andThen(ramseteCommand).andThen(Commands.runOnce(() -> Robot.drive.tankDriveVolts(0, 0)));    
     }
 }

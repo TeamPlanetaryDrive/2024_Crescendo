@@ -20,9 +20,9 @@ public class OI {
    */
   public OI() {
     RobotMap.aButton.onTrue(new AutomaticallyShootShooter(Robot.vision, Robot.drive, Robot.shooter));   
-    RobotMap.bButton.onTrue(new AutomaticallyShootAmp(Robot.vision, Robot.drive, Robot.shooter));
+    // RobotMap.bButton.onTrue();
     RobotMap.xButton.whileTrue(new Intake(Robot.shooter));
-    RobotMap.yButton.onTrue(new ShooterToggleUpDown(Robot.shooter)); 
+    // RobotMap.yButton.onTrue();
     // RobotMap.startButton.onTrue();
     // RobotMap.backButton.onTrue();
     RobotMap.leftBumper.whileTrue(new LiftRetract(Robot.lift));

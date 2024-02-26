@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutoOne;
-import frc.robot.commands.autonomous.AutoThree;
 import frc.robot.commands.autonomous.AutoTwo;
 import frc.robot.subsystems.*;
 import frc.robot.util.Logger;
@@ -43,7 +42,7 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private SendableChooser<Command> m_chooser;
-  private Command autoOne, autoTwo, autoThree;
+  private Command autoOne, autoTwo;
 
   private SendableChooser<Integer> m_driveChooser;
 
@@ -71,7 +70,6 @@ public class Robot extends TimedRobot {
 
     autoOne = new AutoOne(drive);
     autoTwo = new AutoTwo(vision, drive, shooter);
-    autoThree = new AutoThree(vision, drive, shooter);
     m_chooser = new SendableChooser<Command>();
 
     /* 
@@ -81,7 +79,6 @@ public class Robot extends TimedRobot {
      */
     m_chooser.setDefaultOption("Drive Back", autoOne);
     m_chooser.addOption("Drive Back & Speaker Score", autoTwo);
-    m_chooser.addOption("Drive Back & Auto Score", autoThree);
     SmartDashboard.putData("Auto mode", m_chooser);
 
     m_driveChooser = new SendableChooser<Integer>();

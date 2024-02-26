@@ -1,6 +1,5 @@
 package frc.robot.commands.photonvision;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -12,7 +11,7 @@ public class DriveToSpeakerRange extends Command {
 
     private final int APRIL_TAG_ID_SPEAKER_BLUE = Constants.kAPRIL_TAG_ID_SPEAKER_BLUE;
     private final int APRIL_TAG_ID_SPEAKER_RED = Constants.kAPRIL_TAG_ID_SPEAKER_RED;
-    private final double SHOOTING_DISTANCE_TO_SPEAKER_FEET = Constants.kSHOOTING_DISTANCE_TO_SPEAKER_FEET;
+    private final double SHOOTING_DISTANCE_TO_SPEAKER_METERS = Constants.kSHOOTING_DISTANCE_TO_SPEAKER_METERS;
     private final double SPEAKER_HEIGHT_METERS = Constants.kSPEAKER_HEIGHT_METERS;
 
     private double speed;
@@ -30,8 +29,7 @@ public class DriveToSpeakerRange extends Command {
         if(range != -1) {
             speed = .5;
         }
-        range = Units.metersToFeet(range);
-        if(range < SHOOTING_DISTANCE_TO_SPEAKER_FEET) {
+        if(range < SHOOTING_DISTANCE_TO_SPEAKER_METERS) {
             range *= -1;
         }
         drive.resetEncoders();
@@ -44,7 +42,7 @@ public class DriveToSpeakerRange extends Command {
 
     @Override
     public boolean isFinished() {
-        return range == -1 || Math.abs(drive.getAverageDistance()) > SHOOTING_DISTANCE_TO_SPEAKER_FEET;
+        return range == -1 || Math.abs(drive.getAverageDistance()) > SHOOTING_DISTANCE_TO_SPEAKER_METERS;
     }
 
     @Override

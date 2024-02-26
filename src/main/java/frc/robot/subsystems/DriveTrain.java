@@ -31,7 +31,6 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
@@ -49,8 +48,8 @@ public class DriveTrain extends SubsystemBase {
 
   private Trajectory autoTrajectory;
 
-  private final double LEFT_METERS_PER_PULSE = Units.feetToMeters(Constants.kLEFT_ENCODER_FEET_PER_PULSE);
-  private final double RIGHT_METERS_PER_PULSE = Units.feetToMeters(Constants.kRIGHT_ENCODER_FEET_PER_PULSE_FEET);
+  private final double LEFT_METERS_PER_PULSE = Constants.kLEFT_ENCODER_METERS_PER_PULSE;
+  private final double RIGHT_METERS_PER_PULSE = Constants.kRIGHT_ENCODER_METERS_PER_PULSE_FEET;
 
   public DriveTrain(int leftMotorOne, int leftMotorTwo, int rightMotorOne, int rightMotorTwo, int[] leftEncoder, int[] rightEncoder) {
     super();

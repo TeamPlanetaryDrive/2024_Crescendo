@@ -87,4 +87,17 @@ public class PhotonVision extends SubsystemBase {
         Transform3d robotToCam = new Transform3d(new Translation3d(0.5, 0.0, 0.5), new Rotation3d(0,0,0)); //Cam mounted facing forward, half a meter forward of center, half a meter up from center.
         return new PhotonPoseEstimator(AprilTagFields.k2024Crescendo.loadAprilTagLayoutField(), PoseStrategy.AVERAGE_BEST_TARGETS, camera, robotToCam);
     }
+
+    public boolean ensureValidIDInSight(int aprilTagID1, int aprilTagID2) {
+        var result = camera.getLatestResult();
+        if(result.hasTargets()) {
+            List<PhotonTrackedTarget> targets = result.getTargets();
+            for(PhotonTrackedTarget target : targets) {
+                if(target.getFiducialId() == aprilTagID1 || target.getFiducialId() == aprilTagID2) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
