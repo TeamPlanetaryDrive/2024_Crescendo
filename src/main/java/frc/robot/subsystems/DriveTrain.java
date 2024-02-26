@@ -49,7 +49,7 @@ public class DriveTrain extends SubsystemBase {
   private Trajectory autoTrajectory;
 
   private final double LEFT_METERS_PER_PULSE = Constants.kLEFT_ENCODER_METERS_PER_PULSE;
-  private final double RIGHT_METERS_PER_PULSE = Constants.kRIGHT_ENCODER_METERS_PER_PULSE_FEET;
+  private final double RIGHT_METERS_PER_PULSE = Constants.kRIGHT_ENCODER_METERS_PER_PULSE;
 
   public DriveTrain(int leftMotorOne, int leftMotorTwo, int rightMotorOne, int rightMotorTwo, int[] leftEncoder, int[] rightEncoder) {
     super();

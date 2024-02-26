@@ -24,7 +24,7 @@ public class Constants {
     public static final double kAUTO_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 1;
     public static final double kMAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
     public static final double kLEFT_ENCODER_METERS_PER_PULSE = 4./256.;
-    public static final double kRIGHT_ENCODER_METERS_PER_PULSE_FEET = 4./256.;
+    public static final double kRIGHT_ENCODER_METERS_PER_PULSE = 4./256.;
 
     public static final double ksVOLTS = 0;
     public static final double kvVOLT_SECONDS_PER_METER = 0;
