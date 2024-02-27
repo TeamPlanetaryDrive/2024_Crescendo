@@ -60,7 +60,7 @@ public class DriveTrain extends SubsystemBase {
   private Trajectory autoTrajectory;
 
   private final double LEFT_METERS_PER_PULSE = Constants.kLEFT_ENCODER_METERS_PER_PULSE;
-  private final double RIGHT_METERS_PER_PULSE = Constants.kRIGHT_ENCODER_METERS_PER_PULSE_FEET;
+  private final double RIGHT_METERS_PER_PULSE = Constants.kRIGHT_ENCODER_METERS_PER_PULSE;
 
   private final MutableMeasure<Voltage> appliedVoltage = MutableMeasure.mutable(Volts.of(0));
   private final MutableMeasure<Distance> distance = MutableMeasure.mutable(Meters.of(0));

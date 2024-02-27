@@ -19,7 +19,7 @@ import frc.robot.Constants;
 public class PhotonVision extends SubsystemBase {
     private final double CAMERA_HEIGHT_METERS = Constants.kCAMERA_HEIGHT_METERS;
 
-    private final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(Constants.kCAMERA_PITCH_RADIANS);
+    private final double CAMERA_PITCH_RADIANS = Constants.kCAMERA_PITCH_RADIANS;
 
     private PhotonCamera camera;
 
