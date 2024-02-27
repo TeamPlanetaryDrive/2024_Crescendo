@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import java.io.IOException;
@@ -31,7 +32,10 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.units.Distance;
 import edu.wpi.first.units.Measure;
+import edu.wpi.first.units.MutableMeasure;
+import edu.wpi.first.units.Velocity;
 import edu.wpi.first.units.Voltage;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -39,7 +43,11 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Filesystem;
 import frc.robot.Constants;
 import frc.robot.commands.drivetraincommands.DriveCommand;
+
+import static edu.wpi.first.units.Units.Meters;
+import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.Volts;
+import edu.wpi.first.wpilibj.RobotController;
 
 public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive robotDrive;
@@ -53,6 +61,31 @@ public class DriveTrain extends SubsystemBase {
 
   private final double LEFT_METERS_PER_PULSE = Constants.kLEFT_ENCODER_METERS_PER_PULSE;
   private final double RIGHT_METERS_PER_PULSE = Constants.kRIGHT_ENCODER_METERS_PER_PULSE_FEET;
+
+  private final MutableMeasure<Voltage> appliedVoltage = MutableMeasure.mutable(Volts.of(0));
+  private final MutableMeasure<Distance> distance = MutableMeasure.mutable(Meters.of(0));
+  private final MutableMeasure<Velocity<Distance>> velocity = MutableMeasure.mutable(MetersPerSecond.of(0));
+
+  SysIdRoutine routine = new SysIdRoutine(
+            new SysIdRoutine.Config(),
+            new SysIdRoutine.Mechanism(
+              (Measure<Voltage> volts) -> {
+                lMotor.setVoltage(volts.in(Volts));
+                rMotor.setVoltage(volts.in(Volts));
+              }, 
+            log -> {
+                log.motor("drive-left")
+                    .voltage(
+                      appliedVoltage.mut_replace(lMotor.get() * RobotController.getBatteryVoltage(), Volts))
+                    .linearPosition(distance.mut_replace(lEncoder.getDistance(), Meters))
+                    .linearVelocity(velocity.mut_replace(lEncoder.getRate(), MetersPerSecond));
+                log.motor("drive-right")
+                  .voltage(
+                    appliedVoltage.mut_replace(rMotor.get() * RobotController.getBatteryVoltage(), Volts))
+                  .linearPosition(distance.mut_replace(rEncoder.getDistance(), Meters))
+                  .linearVelocity(velocity.mut_replace(rEncoder.getRate(), MetersPerSecond));
+            }, 
+            this));
 
   public DriveTrain(int leftMotorOne, int leftMotorTwo, int rightMotorOne, int rightMotorTwo, int[] leftEncoder, int[] rightEncoder) {
     super();
@@ -76,6 +109,14 @@ public class DriveTrain extends SubsystemBase {
     angleGyro.calibrate();
 
     odometry = new DifferentialDriveOdometry(angleGyro.getRotation2d(), lEncoder.getDistance(), rEncoder.getDistance());
+  }
+
+  public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
+    return routine.quasistatic(direction);
+  }
+
+  public Command sysIdDynamic(SysIdRoutine.Direction direction) {
+    return routine.dynamic(direction);
   }
 
   public void setDriveMode(int mode) {
@@ -115,12 +156,6 @@ public class DriveTrain extends SubsystemBase {
   public void tankDriveVolts(double leftV, double rightV) {
     lMotor.setVoltage(leftV);
     rMotor.setVoltage(rightV);
-    robotDrive.feed();
-  }
-
-  public void driveVoltsSysID(Measure<Voltage> V) {
-    lMotor.setVoltage(V.in(Volts));
-    rMotor.setVoltage(V.in(Volts));
     robotDrive.feed();
   }
 
