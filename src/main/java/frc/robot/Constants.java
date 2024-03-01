@@ -20,7 +20,7 @@ public class Constants {
     public static final double kINTAKE_SPEED = .65;
 
     //Drive Constants
-    public static final double kAUTO_MAX_SPEED_METERS_PER_SECOND = 10;
+    public static final double kAUTO_MAX_SPEED_METERS_PER_SECOND = 5;
     public static final double kAUTO_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 1;
     public static final double kMAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
     public static final double kLEFT_ENCODER_METERS_PER_PULSE = 4./256.;
