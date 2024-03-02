@@ -1,18 +1,19 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Lift extends SubsystemBase {
-    private Victor leftMotor;
-    private Victor rightMotor;
+    private Spark leftMotor;
+    private Spark rightMotor;
     
     private final double LIFT_SPEED = Constants.kLIFT_SPEED;
 
     public Lift(int leftChannel, int rightChannel) {
-        leftMotor = new Victor(leftChannel);
-        rightMotor = new Victor(rightChannel);
+        leftMotor = new Spark(leftChannel);
+        rightMotor = new Spark(rightChannel);
     }
 
     public void extend() {

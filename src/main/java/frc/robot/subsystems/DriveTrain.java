@@ -87,13 +87,11 @@ public class DriveTrain extends SubsystemBase {
             }, 
             this));
 
-  public DriveTrain(int leftMotorOne, int leftMotorTwo, int rightMotorOne, int rightMotorTwo, int[] leftEncoder, int[] rightEncoder) {
+  public DriveTrain(int leftMotor, int rightMotor, int[] leftEncoder, int[] rightEncoder) {
     super();
-    lMotor = new Victor(leftMotorOne);
-    lMotor.addFollower(new Victor(leftMotorTwo));
-
-    rMotor = new Victor(rightMotorOne);
-    rMotor.addFollower(new Victor(rightMotorTwo));
+    lMotor = new Victor(leftMotor);
+    rMotor = new Victor(rightMotor);
+    rMotor.setInverted(true);
     robotDrive = new DifferentialDrive(lMotor, rMotor);
 
     lEncoder = new Encoder(leftEncoder[0], leftEncoder[1]);
@@ -150,6 +148,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void tankDrive(double left, double right) {
+    System.out.println("tank driving");
     robotDrive.tankDrive(left, right);
   }
 
@@ -196,7 +195,7 @@ public class DriveTrain extends SubsystemBase {
 
   //Commands
   public Command getDefaultCommand() {
-    return new DriveCommand(this, driveMode);
+    return new DriveCommand(this, driveMode, robotDrive);
   }
 
   public Command getAutonomousCommand() {

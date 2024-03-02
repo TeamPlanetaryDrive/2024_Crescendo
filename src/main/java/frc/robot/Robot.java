@@ -63,11 +63,10 @@ public class Robot extends TimedRobot {
     RobotMap.init();
 
     // Initialize Subsystems
-    drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL_ONE, RobotMap.LEFT_MOTOR_CHANNEL_TWO, RobotMap.RIGHT_MOTOR_CHANNEL_ONE, RobotMap.RIGHT_MOTOR_CHANNEL_TWO, RobotMap.LEFT_DRIVE_ENCODER_CHANNELS, RobotMap.RIGHT_DRIVE_ENCODER_CHANNELS);
+    drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL, RobotMap.LEFT_DRIVE_ENCODER_CHANNELS, RobotMap.RIGHT_DRIVE_ENCODER_CHANNELS);
     shooter = new ShooterIntake(
-      new int[] {RobotMap.LEFT_SHOOTER_CHANNEL_ONE, RobotMap.LEFT_SHOOTER_CHANNEL_TWO, RobotMap.RIGHT_SHOOTER_CHANNEL_ONE, RobotMap.RIGHT_SHOOTER_CHANNEL_TWO}, 
-      new int[] {RobotMap.LEFT_INTAKE_CHANNEL, RobotMap.RIGHT_INTAKE_CHANNEL}, 
-      new int[] {RobotMap.LEFT_SHOOTER_SOLENOID_CHANNEL, RobotMap.RIGHT_SHOOTER_SOLENOID_CHANNEL}
+      new int[] {RobotMap.LEFT_SHOOTER_CHANNEL, RobotMap.RIGHT_SHOOTER_CHANNEL}, 
+      new int[] {RobotMap.LEFT_INTAKE_CHANNEL, RobotMap.RIGHT_INTAKE_CHANNEL}
     );
     vision = new PhotonVision();
     lift = new Lift(RobotMap.LEFT_LIFT_CHANNEL, RobotMap.RIGHT_LIFT_CHANNEL);
