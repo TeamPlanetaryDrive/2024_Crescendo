@@ -1,9 +1,7 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
-import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -11,7 +9,6 @@ import frc.robot.Robot;
 public class ShooterIntake extends SubsystemBase{
     private final Talon[] mainMotors;
     private final Spark[] intakeMotors;
-    private final Timer timer;
 
     private final double SHOOTING_SPEED = Constants.kSHOOTING_SPEED;
     private final double INTAKE_SPEED = Constants.kINTAKE_SPEED;
@@ -27,9 +24,10 @@ public class ShooterIntake extends SubsystemBase{
             new Spark(intake[1])
         };
 
-        intakeMotors[0].setInverted(true);
+        mainMotors[1].setInverted(true);
 
-        timer = new Timer();
+        intakeMotors[1].setInverted(true);
+        intakeMotors[0].setInverted(true);
     }
 
     public void init(String location) {

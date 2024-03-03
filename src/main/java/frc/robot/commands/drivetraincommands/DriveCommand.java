@@ -36,14 +36,14 @@ public class DriveCommand extends Command {
 
             if(Math.round(left * 8) != 0 || Math.round(right * 8) != 0)
                 drive.tankDrive(lAccelLimiter.calculate(left), rAccelLimiter.calculate(right));
-                System.out.println("Driving");
+                // System.out.println("Driving");
         } else {
             double yax = -RobotMap.XController.getLeftY();
             double xax = -RobotMap.XController.getLeftX();
             if(Math.round(yax * 8) != 0 || Math.round(xax * 8) != 0)
                 drive.arcadeDrive(lAccelLimiter.calculate(yax), xax);
 
-            System.out.println("y axis: " + yax + " x axis: " + xax);
+            // System.out.println("y axis: " + yax + " x axis: " + xax);
         }
     }
 

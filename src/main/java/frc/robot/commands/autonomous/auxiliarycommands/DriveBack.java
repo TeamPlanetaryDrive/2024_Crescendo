@@ -16,11 +16,11 @@ public class DriveBack extends Command {
     }
 
     public void execute() {
-        drive.arcadeDrive(-1, 0);
+        drive.arcadeDrive(-.67, 0);
     }
 
     public boolean isFinished() {
-        return false;
+        return Math.abs(drive.getAverageDistance()) > 1.5;
     }
 
     public void end(boolean interrupted) {

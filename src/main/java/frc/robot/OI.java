@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 // import frc.robot.commands.lift.*;
 // import frc.robot.commands.shooter.*;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
@@ -23,12 +24,11 @@ public class OI {
    * Maps each XBox controller button onto a command if needed
    */
   public OI() {
-    // RobotMap.aButton.onTrue(new AutomaticallyShootShooter(Robot.vision, Robot.drive, Robot.shooter));   
-    // RobotMap.bButton.onTrue();
+    // RobotMap.aButton.onTrue(Commands.runOnce(() -> System.out.println(Robot.drive.getAverageDistance())));   
+    // // RobotMap.bButton.onTrue();
     RobotMap.xButton.whileTrue(new Intake(Robot.shooter));
-    // RobotMap.yButton.onTrue();
-    // RobotMap.startButton.onTrue();
-    // RobotMap.backButton.onTrue();
+    // // RobotMap.startButton.onTrue();
+    // // RobotMap.backButton.onTrue();
     RobotMap.leftBumper.whileTrue(new LiftRetract(Robot.lift));
     RobotMap.rightBumper.whileTrue(new LiftExtend(Robot.lift));
     RobotMap.yButton.whileTrue(new Shoot(Robot.shooter));

@@ -63,7 +63,7 @@ public class Robot extends TimedRobot {
     RobotMap.init();
 
     // Initialize Subsystems
-    drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL, RobotMap.RIGHT_MOTOR_CHANNEL, RobotMap.LEFT_DRIVE_ENCODER_CHANNELS, RobotMap.RIGHT_DRIVE_ENCODER_CHANNELS);
+    drive = new DriveTrain(RobotMap.LEFT_MOTOR_CHANNEL_ONE, RobotMap.LEFT_MOTOR_CHANNEL_TWO, RobotMap.RIGHT_MOTOR_CHANNEL_ONE, RobotMap.RIGHT_MOTOR_CHANNEL_TWO, RobotMap.LEFT_DRIVE_ENCODER_CHANNELS, RobotMap.RIGHT_DRIVE_ENCODER_CHANNELS);
     shooter = new ShooterIntake(
       new int[] {RobotMap.LEFT_SHOOTER_CHANNEL, RobotMap.RIGHT_SHOOTER_CHANNEL}, 
       new int[] {RobotMap.LEFT_INTAKE_CHANNEL, RobotMap.RIGHT_INTAKE_CHANNEL}
@@ -73,7 +73,7 @@ public class Robot extends TimedRobot {
 
     m_oi = new OI();
 
-    autoOne = new AutoOne(drive);
+    autoOne = new AutoOne(drive, shooter);
     autoTwo = new AutoTwo(vision, drive, shooter);
     m_chooser = new SendableChooser<Command>();
 
@@ -82,8 +82,8 @@ public class Robot extends TimedRobot {
      * Two --> Drive Back + Speaker Shoot 
      * Three --> Drive Back + Amp Shoot
      */
-    m_chooser.setDefaultOption("Drive Back", autoOne);
-    m_chooser.addOption("Drive Back & Speaker Score", autoTwo);
+    m_chooser.setDefaultOption("Drive Back & Speaker", autoOne);
+    m_chooser.addOption("Drive Back", autoTwo);
     SmartDashboard.putData("Auto mode", m_chooser);
 
     m_driveChooser = new SendableChooser<Integer>();

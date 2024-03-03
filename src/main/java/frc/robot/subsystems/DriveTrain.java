@@ -87,10 +87,12 @@ public class DriveTrain extends SubsystemBase {
             }, 
             this));
 
-  public DriveTrain(int leftMotor, int rightMotor, int[] leftEncoder, int[] rightEncoder) {
+  public DriveTrain(int leftMotor, int leftMotor2, int rightMotor, int rightMotor2, int[] leftEncoder, int[] rightEncoder) {
     super();
     lMotor = new Victor(leftMotor);
+    lMotor.addFollower(new Victor(leftMotor2));
     rMotor = new Victor(rightMotor);
+    rMotor.addFollower(new Victor(rightMotor2));
     rMotor.setInverted(true);
     robotDrive = new DifferentialDrive(lMotor, rMotor);
 
@@ -148,7 +150,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void tankDrive(double left, double right) {
-    System.out.println("tank driving");
+    // System.out.println("tank driving");
     robotDrive.tankDrive(left, right);
   }
 
@@ -221,12 +223,21 @@ public class DriveTrain extends SubsystemBase {
       autoTrajectory = TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, new Rotation2d(0)),
         List.of(
-          new Translation2d(-2, 0)
+          new Translation2d(1, 0)
         ),
         new Pose2d(0, 0, new Rotation2d(0)),
         config
       );
     }
+
+    autoTrajectory = TrajectoryGenerator.generateTrajectory(
+        new Pose2d(0, 0, new Rotation2d(0)),
+        List.of(
+          new Translation2d(1, 0)
+        ),
+        new Pose2d(0, 0, new Rotation2d(0)),
+        config
+      );
 
     RamseteCommand ramseteCommand = new RamseteCommand(
       autoTrajectory,
