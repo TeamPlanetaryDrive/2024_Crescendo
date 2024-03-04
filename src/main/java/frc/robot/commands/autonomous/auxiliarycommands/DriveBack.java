@@ -12,7 +12,7 @@ public class DriveBack extends Command {
     }
 
     public void initialize() {
-
+        drive.resetEncoders();
     }
 
     public void execute() {
@@ -24,6 +24,6 @@ public class DriveBack extends Command {
     }
 
     public void end(boolean interrupted) {
-
+        drive.arcadeDrive(0, 0);
     }
 }

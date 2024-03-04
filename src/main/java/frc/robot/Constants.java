@@ -16,7 +16,7 @@ public class Constants {
     public static final double kSPEAKER_HEIGHT_METERS = Units.inchesToMeters(51.875);
 
     //Shooter constants
-    public static final double kSHOOTING_SPEED = 1;
+    public static final double kSHOOTING_SPEED = .8;
     public static final double kINTAKE_SPEED = .65;
 
     //Drive Constants

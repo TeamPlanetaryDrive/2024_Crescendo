@@ -87,8 +87,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
 
     m_driveChooser = new SendableChooser<Integer>();
-    m_driveChooser.setDefaultOption("Tank Drive", 1);
-    m_driveChooser.addOption("Arcade Drive", 0);
+    m_driveChooser.setDefaultOption("Arcade Drive", 0);
+    m_driveChooser.addOption("Tank Drive", 1);
+    
     SmartDashboard.putData("Drive Mode", m_driveChooser);
 
     ///TEST CODE PLEASE
@@ -164,11 +165,11 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     // 0: arcade, 1: tank
+    drive.setDefaultCommand(drive.getDefaultCommand());
     int m_driveMode = m_driveChooser.getSelected();
 
     //Sets the default command of drive
     drive.setDriveMode(m_driveMode);
-    drive.setDefaultCommand(drive.getDefaultCommand());
   }
 
   /**
@@ -176,7 +177,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-
+    
+   
   }
 
   /**

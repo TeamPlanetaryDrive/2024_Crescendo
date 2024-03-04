@@ -54,7 +54,7 @@ public class DriveTrain extends SubsystemBase {
   private Victor lMotor, rMotor;
   private Encoder lEncoder, rEncoder;
   private ADXRS450_Gyro angleGyro;
-  private int driveMode = 1; //0: Arcade, 1: Tank
+  private int driveMode = 0; //0: Arcade, 1: Tank
   private DifferentialDriveOdometry odometry;
 
   private Trajectory autoTrajectory;

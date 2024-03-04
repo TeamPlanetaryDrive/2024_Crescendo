@@ -40,9 +40,26 @@ public class ShooterIntake extends SubsystemBase{
         intake();
     }
 
+    public void shootSlow() {
+        mainMotors[0].set(SHOOTING_SPEED * .75);
+        mainMotors[1].set(SHOOTING_SPEED * .75);
+        intake();
+    }
+
+    public void intakeFromShooters() {
+        mainMotors[0].set(-SHOOTING_SPEED*3.0/4.0);
+        mainMotors[1].set(-SHOOTING_SPEED*3.0/4.0);
+        intakeBackwards();
+    }
+
     public void intake() {
         intakeMotors[0].set(INTAKE_SPEED);
         intakeMotors[1].set(INTAKE_SPEED);
+    }
+
+    public void intakeBackwards() {
+        intakeMotors[0].set(-INTAKE_SPEED);
+        intakeMotors[1].set(-INTAKE_SPEED);
     }
 
     public void stopShooterMotors() {

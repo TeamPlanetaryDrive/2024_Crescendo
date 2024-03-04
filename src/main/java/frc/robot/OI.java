@@ -13,7 +13,10 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.lift.LiftExtend;
 import frc.robot.commands.lift.LiftRetract;
 import frc.robot.commands.shooter.Intake;
+import frc.robot.commands.shooter.IntakeBackwards;
+import frc.robot.commands.shooter.IntakeFromShooter;
 import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.shooter.ShootSlow;
 /**
  * This class is what binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -24,20 +27,14 @@ public class OI {
    * Maps each XBox controller button onto a command if needed
    */
   public OI() {
-    // RobotMap.aButton.onTrue(Commands.runOnce(() -> System.out.println(Robot.drive.getAverageDistance())));   
-    // // RobotMap.bButton.onTrue();
+    RobotMap.aButton.whileTrue(new IntakeFromShooter(Robot.shooter));   
+    RobotMap.bButton.whileTrue(new Shoot(Robot.shooter));
     RobotMap.xButton.whileTrue(new Intake(Robot.shooter));
-    // // RobotMap.startButton.onTrue();
+    RobotMap.yButton.whileTrue(new ShootSlow(Robot.shooter));
+    RobotMap.startButton.whileTrue(new IntakeBackwards(Robot.shooter));
     // // RobotMap.backButton.onTrue();
     RobotMap.leftBumper.whileTrue(new LiftRetract(Robot.lift));
     RobotMap.rightBumper.whileTrue(new LiftExtend(Robot.lift));
-    RobotMap.yButton.whileTrue(new Shoot(Robot.shooter));
-
-    // RobotMap.aButton.whileTrue(Robot.drive.sysIdQuasistatic(SysIdRoutine.Direction.kForward));
-    // RobotMap.bButton.whileTrue(Robot.drive.sysIdQuasistatic(SysIdRoutine.Direction.kReverse));
-    // RobotMap.xButton.whileTrue(Robot.drive.sysIdDynamic(SysIdRoutine.Direction.kForward));
-    // RobotMap.yButton.whileTrue(Robot.drive.sysIdDynamic(SysIdRoutine.Direction.kReverse));
-
     
     // RobotMap.leftStickButton.whileTrue();
     // RobotMap.rightStickButton.whileTrue();

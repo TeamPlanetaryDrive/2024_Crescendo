@@ -26,7 +26,9 @@ public class DriveCommand extends Command {
     }
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+        
+    }
 
     @Override
     public void execute() {
@@ -41,7 +43,7 @@ public class DriveCommand extends Command {
             double yax = -RobotMap.XController.getLeftY();
             double xax = -RobotMap.XController.getLeftX();
             if(Math.round(yax * 8) != 0 || Math.round(xax * 8) != 0)
-                drive.arcadeDrive(lAccelLimiter.calculate(yax), xax);
+                drive.arcadeDrive(lAccelLimiter.calculate(yax), xax * .75);
 
             // System.out.println("y axis: " + yax + " x axis: " + xax);
         }
