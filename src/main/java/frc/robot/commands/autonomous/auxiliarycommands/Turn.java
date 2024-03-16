@@ -20,7 +20,7 @@ public class Turn extends Command {
     }
 
     public void execute() {
-        drive.arcadeDrive(0, multiplier * .5);
+        drive.arcadeDrive(0, multiplier * .7);
     }
 
     public boolean isFinished() {

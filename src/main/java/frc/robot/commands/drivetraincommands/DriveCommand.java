@@ -11,8 +11,6 @@ public class DriveCommand extends Command {
     private DriveTrain drive;
     private int driveMode;
     private SlewRateLimiter lAccelLimiter, rAccelLimiter;
-    private DifferentialDrive driveTrain;
-
     private final double maxAccel = Constants.kMAX_ACCELERATION_METERS_PER_SECOND_SQUARED;
 
 
@@ -21,7 +19,6 @@ public class DriveCommand extends Command {
         this.driveMode = driveMode;
         lAccelLimiter = new SlewRateLimiter(maxAccel);
         rAccelLimiter = new SlewRateLimiter(maxAccel);
-        this.driveTrain = driveTrain;
         addRequirements(this.drive);
     }
 
@@ -43,7 +40,7 @@ public class DriveCommand extends Command {
             double yax = -RobotMap.XController.getLeftY();
             double xax = -RobotMap.XController.getLeftX();
             if(Math.round(yax * 8) != 0 || Math.round(xax * 8) != 0)
-                drive.arcadeDrive(lAccelLimiter.calculate(yax), xax * .75);
+                drive.arcadeDrive(lAccelLimiter.calculate(yax), xax);
 
             // System.out.println("y axis: " + yax + " x axis: " + xax);
         }

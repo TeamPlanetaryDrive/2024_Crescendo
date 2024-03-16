@@ -3,10 +3,10 @@ package frc.robot.commands.autonomous.auxiliarycommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveBack extends Command {
+public class DriveForward extends Command {
     private DriveTrain drive;
 
-    public DriveBack(DriveTrain drive) {
+    public DriveForward(DriveTrain drive) {
         this.drive = drive;
         addRequirements(this.drive);
     }
@@ -16,11 +16,11 @@ public class DriveBack extends Command {
     }
 
     public void execute() {
-        drive.arcadeDrive(-.67, 0);
+        drive.arcadeDrive(.85, 0);
     }
 
     public boolean isFinished() {
-        return Math.abs(drive.getAverageDistance()) > .75;
+        return Math.abs(drive.getAverageDistance()) > 1.5;
     }
 
     public void end(boolean interrupted) {

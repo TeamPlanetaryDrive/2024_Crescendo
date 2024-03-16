@@ -13,7 +13,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.autonomous.AutoFive;
+import frc.robot.commands.autonomous.AutoFour;
 import frc.robot.commands.autonomous.AutoOne;
+import frc.robot.commands.autonomous.AutoSeven;
+import frc.robot.commands.autonomous.AutoSix;
+import frc.robot.commands.autonomous.AutoThree;
 import frc.robot.commands.autonomous.AutoTwo;
 import frc.robot.subsystems.*;
 import frc.robot.util.Logger;
@@ -44,7 +49,7 @@ public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
   private SendableChooser<Command> m_chooser;
-  private Command autoOne, autoTwo;
+  private Command autoOne, autoTwo, autoThree, autoFour, autoFive, autoSix, autoSeven;
 
   private SendableChooser<Integer> m_driveChooser;
 
@@ -74,7 +79,12 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
 
     autoOne = new AutoOne(drive, shooter);
-    autoTwo = new AutoTwo(vision, drive, shooter);
+    autoTwo = new AutoTwo(drive, shooter);
+    autoThree = new AutoThree(drive, shooter);
+    autoFour = new AutoFour(drive, shooter);
+    autoFive = new AutoFive(drive, shooter);
+    autoSix = new AutoSix(drive, shooter);
+    autoSeven = new AutoSeven(shooter);
     m_chooser = new SendableChooser<Command>();
 
     /* 
@@ -84,6 +94,11 @@ public class Robot extends TimedRobot {
      */
     m_chooser.setDefaultOption("Drive Back & Speaker", autoOne);
     m_chooser.addOption("Drive Back", autoTwo);
+    m_chooser.addOption("Daniel's weird auto", autoThree);
+    m_chooser.addOption("Shoot, turn left, drive back", autoFour);
+    m_chooser.addOption("Shoot, turn right, drive back", autoFive);
+    m_chooser.addOption("SBFS (Shoot Back Forward Shoot)", autoSix);
+    m_chooser.addOption("Just Shoot", autoSeven);
     SmartDashboard.putData("Auto mode", m_chooser);
 
     m_driveChooser = new SendableChooser<Integer>();
@@ -96,7 +111,7 @@ public class Robot extends TimedRobot {
     ///TEST CODE PLEASE
     ///TEST CODE PLEASE
 
-    // Creates UsbCamera and MjpegServer [1] and connects them
+    // Creates UsbCamera and MjpegServer and connects them shows on the dashboard
     cam1 = CameraServer.startAutomaticCapture();
     cam2 = CameraServer.startAutomaticCapture();
   }

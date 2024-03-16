@@ -6,10 +6,6 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.Commands;
-// import frc.robot.commands.lift.*;
-// import frc.robot.commands.shooter.*;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.lift.LiftExtend;
 import frc.robot.commands.lift.LiftRetract;
 import frc.robot.commands.shooter.Intake;

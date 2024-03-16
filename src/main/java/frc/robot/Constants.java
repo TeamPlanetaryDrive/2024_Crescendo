@@ -17,12 +17,12 @@ public class Constants {
 
     //Shooter constants
     public static final double kSHOOTING_SPEED = .8;
-    public static final double kINTAKE_SPEED = .65;
+    public static final double kINTAKE_SPEED = 1;
 
     //Drive Constants
     public static final double kAUTO_MAX_SPEED_METERS_PER_SECOND = 5;
     public static final double kAUTO_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 1;
-    public static final double kMAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 2;
+    public static final double kMAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 2.3;
     public static final double kLEFT_ENCODER_METERS_PER_PULSE = .47877872/90.;
     public static final double kRIGHT_ENCODER_METERS_PER_PULSE = .47877872/90.;
 
