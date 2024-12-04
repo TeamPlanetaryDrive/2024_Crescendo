@@ -8,6 +8,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
@@ -32,6 +35,7 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.units.Distance;
 import edu.wpi.first.units.Measure;
 import edu.wpi.first.units.MutableMeasure;
@@ -51,6 +55,11 @@ import edu.wpi.first.wpilibj.RobotController;
 
 public class DriveTrain extends SubsystemBase {
   private final DifferentialDrive robotDrive;
+  private double kP = 0.68;
+  private ShuffleboardTab tab = Shuffleboard.getTab("Tab 3");
+  private GenericEntry maxSpeed = tab.add("P", 0.0).getEntry();
+  private final double kI = 0.0;
+  private final double kD = 0.0;
   private Victor lMotor, rMotor;
   private Encoder lEncoder, rEncoder;
   private ADXRS450_Gyro angleGyro;
@@ -65,6 +74,8 @@ public class DriveTrain extends SubsystemBase {
   private final MutableMeasure<Voltage> appliedVoltage = MutableMeasure.mutable(Volts.of(0));
   private final MutableMeasure<Distance> distance = MutableMeasure.mutable(Meters.of(0));
   private final MutableMeasure<Velocity<Distance>> velocity = MutableMeasure.mutable(MetersPerSecond.of(0));
+
+  private PIDController pidController;
 
   SysIdRoutine routine = new SysIdRoutine(
             new SysIdRoutine.Config(),
@@ -109,6 +120,8 @@ public class DriveTrain extends SubsystemBase {
     angleGyro.calibrate();
 
     odometry = new DifferentialDriveOdometry(angleGyro.getRotation2d(), lEncoder.getDistance(), rEncoder.getDistance());
+    
+    pidController = new PIDController(kP, kI, kD);
   }
 
   public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
@@ -254,5 +267,12 @@ public class DriveTrain extends SubsystemBase {
     
     return Commands.runOnce(() -> this.resetOdometry(autoTrajectory.getInitialPose()))
     .andThen(ramseteCommand).andThen(Commands.runOnce(() -> this.tankDriveVolts(0, 0)));
+  }
+
+  public void travelXFeet(double x) {
+    pidController.setP(maxSpeed.getDouble(0.0));
+    double y = Math.max(pidController.calculate(getAverageDistance(), -1), -0.7);
+    SmartDashboard.putNumber("Speed", y);
+    arcadeDrive(y, 0);
   }
 }

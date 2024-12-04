@@ -20,6 +20,7 @@ import frc.robot.commands.autonomous.AutoSeven;
 import frc.robot.commands.autonomous.AutoSix;
 import frc.robot.commands.autonomous.AutoThree;
 import frc.robot.commands.autonomous.AutoTwo;
+import frc.robot.commands.drivetraincommands.DriveFiveFeetCommand;
 import frc.robot.subsystems.*;
 import frc.robot.util.Logger;
 
@@ -180,11 +181,13 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     // 0: arcade, 1: tank
-    drive.setDefaultCommand(drive.getDefaultCommand());
+    //drive.setDefaultCommand(drive.getDefaultCommand());
     int m_driveMode = m_driveChooser.getSelected();
 
     //Sets the default command of drive
     drive.setDriveMode(m_driveMode);
+
+    //CommandScheduler.getInstance().schedule(new DriveFiveFeetCommand(drive));
   }
 
   /**

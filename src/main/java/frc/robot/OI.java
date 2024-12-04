@@ -6,6 +6,12 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.button.NetworkButton;
+import frc.robot.commands.drivetraincommands.DriveFiveFeetCommand;
 import frc.robot.commands.lift.LiftExtend;
 import frc.robot.commands.lift.LiftRetract;
 import frc.robot.commands.shooter.Intake;
@@ -23,14 +29,16 @@ public class OI {
    * Maps each XBox controller button onto a command if needed
    */
   public OI() {
-    RobotMap.aButton.whileTrue(new IntakeFromShooter(Robot.shooter));   
-    RobotMap.bButton.whileTrue(new Shoot(Robot.shooter));
-    RobotMap.xButton.whileTrue(new Intake(Robot.shooter));
-    RobotMap.yButton.whileTrue(new ShootSlow(Robot.shooter));
-    RobotMap.startButton.whileTrue(new IntakeBackwards(Robot.shooter));
+    //RobotMap.aButton.whileTrue(new IntakeFromShooter(Robot.shooter));   
+    //RobotMap.bButton.whileTrue(new Shoot(Robot.shooter));
+    //RobotMap.xButton.whileTrue(new Intake(Robot.shooter));
+    //RobotMap.yButton.whileTrue(new ShootSlow(Robot.shooter));
+    //RobotMap.startButton.whileTrue(new IntakeBackwards(Robot.shooter));
     // // RobotMap.backButton.onTrue();
-    RobotMap.leftBumper.whileTrue(new LiftRetract(Robot.lift));
-    RobotMap.rightBumper.whileTrue(new LiftExtend(Robot.lift));
+    //RobotMap.leftBumper.whileTrue(new LiftRetract(Robot.lift));
+    //RobotMap.rightBumper.whileTrue(new LiftExtend(Robot.lift));
+
+    SmartDashboard.putData("Go back!!", new DriveFiveFeetCommand(Robot.drive));
     
     // RobotMap.leftStickButton.whileTrue();
     // RobotMap.rightStickButton.whileTrue();
