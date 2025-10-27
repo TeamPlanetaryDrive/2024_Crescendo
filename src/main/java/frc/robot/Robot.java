@@ -8,9 +8,15 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.AutoFive;
@@ -106,6 +112,13 @@ public class Robot extends TimedRobot {
     m_driveChooser.addOption("Tank Drive", 1);
     
     SmartDashboard.putData("Drive Mode", m_driveChooser);
+
+    GenericEntry _intakeToggle = Shuffleboard.getTab("Drive").add("Activate shooter", false).withWidget(BuiltInWidgets.kToggleButton).getEntry();
+    Trigger toggleTrigger = new Trigger(() -> _intakeToggle.getBoolean(false));
+    toggleTrigger.whileTrue(new RunCommand(shooter::shoot));
+
+
+    // GenericEntry m_powerSlider = Shuffleboard.getTab("Controls").add("Set Power", 0).withWidget("TextView").getEntry(); 
 
     ///TEST CODE PLEASE
     ///TEST CODE PLEASE

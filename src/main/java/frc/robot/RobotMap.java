@@ -41,7 +41,7 @@ public class RobotMap {
         /**
          * Initializes all the buttons in the XBox Controller
          */
-        public static void init() {
+        public static void init() {     
                 //map each button to a JoystickButton
                 aButton = new JoystickButton(XController, 1);
                 bButton = new JoystickButton(XController, 2);
